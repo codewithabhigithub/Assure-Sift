@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-inter: var(--font-inter);
+  --font-outfit: var(--font-outfit);
+  
+  --color-brand: #D81F47;
+  --color-brand-dark: #a01534;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+  }
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    font-family: var(--font-inter), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit), sans-serif;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    @apply antialiased selection:bg-brand/30;
+  }
+}
+
+/* Custom transitions and utility classes for a premium feel */
+.transition-all-custom {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.premium-shadow {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.05);
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, #D81F47 0%, #a01534 100%);
+}
+
