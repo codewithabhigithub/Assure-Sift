@@ -1,52 +1,154 @@
 @import "tailwindcss";
 
-@theme inline {
-  --font-inter: var(--font-inter);
-  --font-outfit: var(--font-outfit);
+@theme {
+  --color-bg-primary: #F8F6F2;
+  --color-bg-white: #FFFFFF;
+  --color-bg-dark: #1A1A2E;
+  --color-accent: #C4472A;
+  --color-accent-hover: #A63A22;
+  --color-stone: #E8E4DC;
+  --color-text-dark: #1A1A2E;
+  --color-text-muted: #888888;
   
-  --color-brand: #D81F47;
-  --color-brand-dark: #a01534;
+  --shadow-soft: 0 4px 20px rgba(0,0,0,0.03);
+  --shadow-hover: 0 12px 40px rgba(0,0,0,0.06);
+  
+  --radius-card: 32px;
+  --radius-pill: 999px;
+  
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;
-    --foreground: #f8fafc;
-  }
+  --bg-primary: #F8F6F2;
+  --bg-white: #FFFFFF;
+  --bg-dark: #1A1A2E;
+  --accent: #C4472A;
+  --accent-hover: #A63A22;
+  --stone: #E8E4DC;
+  --text-dark: #1A1A2E;
+  --text-muted: #888888;
+  --shadow-soft: 0 4px 20px rgba(0,0,0,0.03);
+  --shadow-hover: 0 12px 40px rgba(0,0,0,0.06);
+  --radius-card: 32px;
+  --radius-pill: 999px;
+  --container: 1280px; /* Refined from 1400px for better density */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
 }
 
 @layer base {
-  html {
-    @apply scroll-smooth;
-    font-family: var(--font-inter), sans-serif;
+  * {
+    border-color: var(--stone);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-outfit), sans-serif;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    background: var(--background);
-    color: var(--foreground);
-    @apply antialiased selection:bg-brand/30;
+    background-color: var(--bg-primary);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text-dark);
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.85;
+    max-width: 60ch;
+    font-weight: 300;
+  }
+
+  section {
+    padding: 120px 0; /* Balanced vertical rhythm */
   }
 }
 
-/* Custom transitions and utility classes for a premium feel */
-.transition-all-custom {
-  @apply transition-all duration-300 ease-in-out;
+@layer components {
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .btn-pill {
+    border-radius: 9999px;
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.7rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--stone);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--text-dark);
+    color: white;
+    border-color: var(--text-dark);
+  }
 }
 
-.premium-shadow {
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.05);
+.subtitle {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.premium-gradient {
-  background: linear-gradient(135deg, #D81F47 0%, #a01534 100%);
+.section-title {
+  font-size: clamp(42px, 4vw, 58px);
+  line-height: 1.05;
+  margin-bottom: 2.5rem;
 }
 
+/* Luxury Editorial Spacing */
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+/* Glassmorphism */
+.glass {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.transition-premium {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

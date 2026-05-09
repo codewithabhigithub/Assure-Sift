@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState, useContext } from 'react';
+import { Lock, User } from 'lucide-react';
 import { AuthContext } from '@/context/AuthContext';
-import InfoBar from "@/components/Infobar";
-import InfoBarMob from "@/components/InfobarMob";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
+import { Container, Section } from "@/components/common/Layout";
+import { Reveal } from "@/components/ui/Reveal";
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -18,62 +19,71 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <InfoBar />
-      <InfoBarMob />
+    <main className="min-h-screen bg-bg-primary flex flex-col">
       <Navbar />
       
-      <div className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-2xl border border-gray-100">
-          <div className="text-center">
-            <h2 className="text-3xl font-outfit font-black text-gray-900">Admin Login</h2>
-            <p className="mt-2 text-sm text-gray-500 font-medium">Access your dashboard</p>
-          </div>
-          
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-bold text-gray-700">Username</label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
-                  placeholder="Enter username"
-                  required
-                />
+      <div className="flex-grow flex items-center justify-center pt-[120px] pb-32 px-6">
+        <Container className="max-w-md w-full">
+          <Reveal width="100%">
+            <div className="bg-white p-12 lg:p-16 rounded-[40px] shadow-hover border border-stone/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              
+              <div className="text-center mb-12">
+                <span className="subtitle">Secure Portal</span>
+                <h2 className="text-4xl lg:text-5xl font-display leading-tight mb-2">Admin Login</h2>
+                <p className="text-text-muted font-body font-light text-sm">Access your strategic dashboard</p>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-gray-700">Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
-                  placeholder="Enter password"
-                  required
-                />
-              </div>
+              
+              <form className="space-y-8" onSubmit={handleSubmit}>
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1 flex items-center gap-2">
+                      <User size={12} /> Username
+                    </label>
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className="w-full bg-stone/5 border-b border-stone/30 px-6 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
+                      placeholder="Principal ID"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1 flex items-center gap-2">
+                      <Lock size={12} /> Password
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full bg-stone/5 border-b border-stone/30 px-6 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
+                      placeholder="Access Token"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="bg-accent/5 border-l-4 border-accent p-4 rounded-r-xl">
+                    <p className="text-xs text-accent font-bold tracking-widest uppercase">{error}</p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full btn-primary py-5 text-[11px] tracking-[0.2em] uppercase"
+                >
+                  Initiate Session
+                </button>
+              </form>
             </div>
-
-            {error && (
-              <div className="bg-red-50 border-l-4 border-red-500 p-4">
-                <p className="text-sm text-red-700 font-bold">{error}</p>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-black rounded-xl text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-all shadow-lg hover:shadow-xl uppercase tracking-widest"
-            >
-              Sign In
-            </button>
-          </form>
-        </div>
+          </Reveal>
+        </Container>
       </div>
       
       <Footer />
-    </div>
+    </main>
   );
 };
 

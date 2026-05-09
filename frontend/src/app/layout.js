@@ -1,29 +1,32 @@
-import { Inter, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-const inter = Inter({
-  variable: "--font-inter",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const jost = Jost({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata = {
-  title: "Sureshift | Reliable Logistics & Courier Services",
-  description: "Experience premium logistics and courier services with Sureshift. Fast, secure, and transparent.",
+  title: "Assure Sift | Premium Relocation Services",
+  description: "India's largest and most awarded movers. Experience architectural minimalism and refined hospitality in relocation.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${jost.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen bg-bg-primary font-body text-text-dark">
         <AuthProvider>
           {children}
         </AuthProvider>
@@ -31,5 +34,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-
