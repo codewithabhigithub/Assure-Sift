@@ -1,24 +1,38 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, RotateCcw, Activity } from 'lucide-react';
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link';
+import { 
+    MapPin, 
+    Building2, 
+    Phone, 
+    Clock, 
+    Mail 
+} from 'lucide-react';
+import { motion } from 'framer-motion';
+
 import api from '@/services/api';
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { Container, Section } from "@/components/common/Layout";
-import { Reveal } from "@/components/ui/Reveal";
+import { Container } from "@/components/common/Layout";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const CONTACT_OPTIONS = [
-    { id: 1, label: "Inquiry" },
+    { id: 1, label: "General Inquiry" },
     { id: 2, label: "Feedback" },
     { id: 3, label: "Support" },
+    { id: 4, label: "Get a Quote" }
 ];
 
 export default function ContactUsPage() {
-    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [formData, setFormData] = useState({ 
+        name: "", 
+        email: "", 
+        phone: "",
+        subject: "",
+        message: "" 
+    });
+    const [selectedOption, setSelectedOption] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
@@ -27,8 +41,8 @@ export default function ContactUsPage() {
     };
 
     const handleReset = () => {
-        setFormData({ name: "", email: "", message: "" });
-        setSelectedOption(null);
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+        setSelectedOption("");
     };
 
     const handleSubmit = async (e) => {
@@ -37,7 +51,7 @@ export default function ContactUsPage() {
 
         const updatedFormData = {
             ...formData,
-            purpose: CONTACT_OPTIONS.find(option => option.id === selectedOption)?.label || ''
+            purpose: selectedOption || 'General Inquiry'
         };
 
         try {
@@ -53,203 +67,283 @@ export default function ContactUsPage() {
     };
 
     return (
-        <main className="min-h-screen bg-bg-primary">
+        <main className="min-h-screen bg-[#F8F6F2]">
             <Navbar />
-            <WhatsAppButton />
 
-            {/* Luxury Header */}
-            <section className="bg-bg-dark pt-[200px] pb-[120px] text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/10 blur-[160px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                <Container className="relative z-10 text-center">
-                    <Reveal>
-                        <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-6 block">Get in Touch</span>
-                        <h1 className="text-6xl lg:text-[88px] font-display leading-[1.05] mb-8">
-                            Contact our <span className="text-accent italic font-display">Concierge</span>
+            {/* SECTION 1 — PAGE HERO BANNER */}
+            <section className="bg-[#F8F6F2] h-[280px] pt-[72px] flex flex-col items-center justify-center text-center">
+                <Container>
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">
+                            GET IN TOUCH
+                        </span>
+                        <h1 className="font-display font-bold text-[60px] text-[#1A1A2E] mt-[8px] leading-none">
+                            Contact Us
                         </h1>
-                        <p className="text-white/40 text-lg font-body font-light max-w-2xl mx-auto leading-relaxed">
-                            Have questions about your upcoming move? Our elite relocation specialists are here to assist you 24/7.
+                        <p className="font-body text-[16px] text-[#777] max-w-[500px] mx-auto mt-[12px] leading-relaxed">
+                            We&apos;re here to help with your move. Reach out and our team will respond within 24 hours.
                         </p>
-                    </Reveal>
+                        <nav className="font-body text-[13px] text-[#aaa] mt-4 flex justify-center gap-2">
+                            <Link href="/" className="hover:text-[#C4472A] transition-colors">Home</Link>
+                            <span>→</span>
+                            <span className="text-[#1A1A2E]">Contact Us</span>
+                        </nav>
+                    </motion.div>
                 </Container>
             </section>
 
-            <Section className="pb-32 -mt-20">
-                <Container>
-                    <div className="flex flex-col lg:flex-row bg-white rounded-[48px] shadow-hover overflow-hidden border border-stone/20">
-                        {/* Form Section */}
-                        <div className="w-full lg:w-3/5 p-12 lg:p-20">
-                            <div className="mb-16">
-                                <span className="subtitle">Bespoke Support</span>
-                                <h2 className="text-4xl lg:text-5xl font-display leading-tight mb-4">Send an Inquiry</h2>
-                                <p className="text-text-muted font-body font-light">Your request will be prioritized by our move management team.</p>
-                            </div>
+            {/* SECTION 2 — CONTACT INFO CARDS ROW */}
+            <section className="bg-white py-[60px]">
+                <Container className="max-w-[1240px]">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+                        {/* Card 1 */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-white rounded-[16px] shadow-[0_2px_24px_rgba(0,0,0,0.07)] p-[36px_32px] text-center border-t-[3px] border-[#C4472A] flex flex-col items-center"
+                        >
+                            <MapPin size={32} className="text-[#C4472A] stroke-[1.5]" />
+                            <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Head Office</h3>
+                            <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
+                                House No. 14, Ganesh Nagar-17,<br/>
+                                Niwaru Road, Jhotwara,<br/>
+                                Jaipur, Rajasthan 302012
+                            </p>
+                        </motion.div>
 
-                            <form className="space-y-10" onSubmit={handleSubmit}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1" htmlFor="name">Full Name</label>
-                                        <input
-                                            type="text"
-                                            id="name"
+                        {/* Card 2 */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="bg-white rounded-[16px] shadow-[0_2px_24px_rgba(0,0,0,0.07)] p-[36px_32px] text-center border-t-[3px] border-[#C4472A] flex flex-col items-center"
+                        >
+                            <Building2 size={32} className="text-[#C4472A] stroke-[1.5]" />
+                            <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Branch Office</h3>
+                            <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
+                                263/827, Sector-26,<br/>
+                                Opposite Unique Tower,<br/>
+                                Pratap Nagar, Jaipur 302033
+                            </p>
+                        </motion.div>
+
+                        {/* Card 3 */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-white rounded-[16px] shadow-[0_2px_24px_rgba(0,0,0,0.07)] p-[36px_32px] text-center border-t-[3px] border-[#C4472A] flex flex-col items-center"
+                        >
+                            <Phone size={32} className="text-[#C4472A] stroke-[1.5]" />
+                            <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Call & Email</h3>
+                            <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
+                                +91-8619771107<br/>
+                                +91-7014329644<br/>
+                                info@assuresift.com
+                            </p>
+                        </motion.div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* SECTION 3 — FORM + SIDEBAR */}
+            <section className="bg-[#F8F6F2] py-[80px]">
+                <Container className="max-w-[1240px]">
+                    <div className="grid lg:grid-cols-[58%_38%] gap-[48px] items-start">
+                        
+                        {/* LEFT — Contact Form Card */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-white rounded-[20px] p-[48px] shadow-[0_8px_48px_rgba(0,0,0,0.09)]"
+                        >
+                            <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">
+                                SEND US A MESSAGE
+                            </span>
+                            <h2 className="font-display font-bold text-[36px] text-[#1A1A2E] mt-[8px] leading-tight">
+                                We&apos;d Love to Hear From You
+                            </h2>
+                            <p className="font-body text-[14px] text-[#777] mt-[8px] mb-[32px]">
+                                Fill out the form and our team will get back to you within 24 hours.
+                            </p>
+
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+                                    <div className="flex flex-col">
+                                        <label htmlFor="name" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Full Name</label>
+                                        <input 
+                                            type="text" 
+                                            id="name" 
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full bg-stone/5 border-b border-stone/30 px-6 py-5 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
-                                            placeholder="Johnathan Doe"
                                             required
+                                            placeholder="Your Full Name" 
+                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
                                         />
                                     </div>
-                                    <div className="space-y-3">
-                                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1" htmlFor="email">Email Address</label>
-                                        <input
-                                            type="email"
-                                            id="email"
+                                    <div className="flex flex-col">
+                                        <label htmlFor="email" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Email Address</label>
+                                        <input 
+                                            type="email" 
+                                            id="email" 
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full bg-stone/5 border-b border-stone/30 px-6 py-5 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
-                                            placeholder="john@example.com"
                                             required
+                                            placeholder="you@example.com" 
+                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-4">
-                                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1">Purpose of Contact</label>
-                                    <div className="flex flex-wrap gap-4 mt-2">
-                                        {CONTACT_OPTIONS.map(option => (
-                                            <button
-                                                key={option.id}
-                                                type="button"
-                                                onClick={() => setSelectedOption(option.id)}
-                                                className={`px-8 py-4 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] transition-all border ${
-                                                    selectedOption === option.id 
-                                                    ? 'bg-accent text-white border-accent shadow-lg' 
-                                                    : 'bg-white text-text-muted border-stone hover:border-accent/30'
-                                                }`}
-                                            >
-                                                {option.label}
-                                            </button>
-                                        ))}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+                                    <div className="flex flex-col">
+                                        <label htmlFor="phone" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Phone Number</label>
+                                        <input 
+                                            type="tel" 
+                                            id="phone" 
+                                            value={formData.phone}
+                                            onChange={handleChange}
+                                            placeholder="+91" 
+                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="subject" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Subject</label>
+                                        <input 
+                                            type="text" 
+                                            id="subject" 
+                                            value={formData.subject}
+                                            onChange={handleChange}
+                                            placeholder="Subject of your message" 
+                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="space-y-3">
-                                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1" htmlFor="message">Your Message</label>
-                                    <textarea
-                                        id="message"
+                                <div className="flex flex-col">
+                                    <label htmlFor="purpose" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Purpose of Contact</label>
+                                    <select 
+                                        id="purpose"
+                                        value={selectedOption}
+                                        onChange={(e) => setSelectedOption(e.target.value)}
+                                        className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors cursor-pointer"
+                                    >
+                                        <option value="" disabled>Select a purpose</option>
+                                        {CONTACT_OPTIONS.map(opt => (
+                                            <option key={opt.id} value={opt.label}>{opt.label}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="flex flex-col">
+                                    <label htmlFor="message" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Your Message</label>
+                                    <textarea 
+                                        id="message" 
                                         rows="5"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        className="w-full bg-stone/5 border-b border-stone/30 px-6 py-5 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl resize-none"
-                                        placeholder="How can our masters of relocation assist you?"
                                         required
+                                        placeholder="How can we help you?" 
+                                        className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors resize-none"
                                     ></textarea>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row items-center gap-10 pt-6">
-                                    <button
-                                        type="submit"
-                                        className={`flex-1 w-full btn-primary py-6 text-[11px] tracking-[0.2em] uppercase ${
-                                            isLoading ? 'opacity-50 cursor-not-allowed' : ''
-                                        }`}
-                                        disabled={isLoading}
-                                    >
-                                        {isLoading ? "Dispatching..." : "Send Message"}
-                                    </button>
-                                    <button 
-                                        type="button"
-                                        onClick={handleReset}
-                                        className="text-text-muted hover:text-accent transition-colors flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em]"
-                                    >
-                                        <RotateCcw size={16} /> Reset
-                                    </button>
-                                </div>
+                                <button 
+                                    type="submit" 
+                                    disabled={isLoading}
+                                    className="w-full bg-[#C4472A] text-white rounded-[50px] py-[16px] font-body font-semibold text-[15px] tracking-[0.04em] hover:bg-[#a83820] transition-colors disabled:opacity-50 mt-[24px]"
+                                >
+                                    {isLoading ? "Sending..." : "Send Message →"}
+                                </button>
+                                
+                                <button 
+                                    type="button" 
+                                    onClick={handleReset}
+                                    className="block w-full text-center mt-[12px] font-body text-[13px] text-[#aaa] underline hover:text-[#1A1A2E] transition-colors"
+                                >
+                                    Reset Form
+                                </button>
                             </form>
-                        </div>
+                        </motion.div>
 
-                        {/* Details Section */}
-                        <div className="w-full lg:w-2/5 bg-bg-dark p-12 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none"></div>
-                            
-                            <div className="space-y-16 relative z-10">
-                                <div>
-                                    <h2 className="text-4xl font-display mb-6">Strategic HQ</h2>
-                                    <p className="text-white/40 font-body font-light leading-relaxed">
-                                        Experience our physical presence at our strategic headquarters or connect instantly via our digital channels.
-                                    </p>
+                        {/* RIGHT — Sidebar */}
+                        <motion.div 
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="lg:sticky lg:top-[100px] flex flex-col gap-[20px]"
+                        >
+                            {/* Card 1 — Working Hours */}
+                            <div className="bg-[#1A1A2E] rounded-[16px] p-[32px]">
+                                <Clock size={28} className="text-[#C4472A] stroke-[1.5]" />
+                                <h3 className="font-body font-semibold text-[16px] text-white mt-[12px] mb-[16px]">Working Hours</h3>
+                                
+                                <div className="flex justify-between items-center py-[12px] border-b border-white/10">
+                                    <span className="font-body text-[13px] text-white/65">Monday – Saturday</span>
+                                    <span className="font-body text-[13px] text-white/65">9:00 AM – 7:00 PM</span>
                                 </div>
-
-                                <div className="space-y-12">
-                                    <div className="flex items-start gap-6 group">
-                                        <div className="p-5 bg-white/5 rounded-2xl text-accent group-hover:bg-accent group-hover:text-white transition-premium">
-                                            <Phone size={24} />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-bold text-accent uppercase tracking-[0.3em] mb-2">Call Priority</p>
-                                            <a href="tel:9073291732" className="text-xl font-display hover:text-accent transition-colors">+91 907 329 1732</a>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-6 group">
-                                        <div className="p-5 bg-white/5 rounded-2xl text-accent group-hover:bg-accent group-hover:text-white transition-premium">
-                                            <Mail size={24} />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-bold text-accent uppercase tracking-[0.3em] mb-2">Electronic Mail</p>
-                                            <a href="mailto:info@assuresift.in" className="text-xl font-display hover:text-accent transition-colors">info@assuresift.in</a>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-6 group">
-                                        <div className="p-5 bg-white/5 rounded-2xl text-accent group-hover:bg-accent group-hover:text-white transition-premium">
-                                            <MapPin size={24} />
-                                        </div>
-                                        <div>
-                                            <p className="text-[10px] font-bold text-accent uppercase tracking-[0.3em] mb-2">Physical Location</p>
-                                            <p className="text-lg font-display leading-tight">Gopal Nagar Extn, Jaipur, Rajasthan</p>
-                                        </div>
-                                    </div>
+                                <div className="flex justify-between items-center py-[12px] border-b border-white/10">
+                                    <span className="font-body text-[13px] text-white/65">Sunday</span>
+                                    <span className="font-body text-[13px] text-white/65">10:00 AM – 4:00 PM</span>
+                                </div>
+                                <div className="flex justify-between items-center py-[12px]">
+                                    <span className="font-body text-[13px] text-white/65">Emergency Support</span>
+                                    <span className="font-body text-[13px] font-semibold text-[#C4472A]">24 / 7</span>
                                 </div>
                             </div>
 
-                            <div className="mt-20 pt-10 border-t border-white/5">
-                                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 mb-8">Follow our Journey</p>
-                                <div className="flex gap-6">
-                                    {[
-                                        { icon: <FaFacebook />, url: "#" },
-                                        { icon: <FaTwitter />, url: "#" },
-                                        { icon: <FaInstagram />, url: "#" },
-                                        { icon: <FaLinkedin />, url: "#" }
-                                    ].map((social, i) => (
-                                        <a 
-                                            key={i}
-                                            href={social.url} 
-                                            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-premium text-white/40 hover:text-white"
-                                        >
-                                            {social.icon}
-                                        </a>
-                                    ))}
-                                </div>
+                            {/* Card 2 — Quick Connect */}
+                            <div className="bg-white rounded-[16px] p-[32px] shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
+                                <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mb-[16px]">Quick Connect</h3>
+                                <a 
+                                    href="tel:+918619771107" 
+                                    className="block w-full text-center border-[1.5px] border-[#C4472A] text-[#C4472A] rounded-[50px] py-[12px] font-body font-medium text-[14px] hover:bg-[#C4472A] hover:text-white transition-colors"
+                                >
+                                    📞 Call Now
+                                </a>
+                                <a 
+                                    href="mailto:info@assuresift.com" 
+                                    className="block w-full text-center bg-[#1A1A2E] text-white rounded-[50px] py-[12px] font-body font-medium text-[14px] hover:bg-[#2a2a3e] transition-colors mt-[12px]"
+                                >
+                                    ✉ Email Us
+                                </a>
                             </div>
-                        </div>
+                        </motion.div>
+
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            {/* Refined Map Section */}
-            <section className="h-[500px] w-full relative grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-1000">
-                <iframe
-                    title="Location map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7004.910594148318!2d76.95840239273868!3d28.61611345269459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0fccba63cc3d%3A0x2fea0e016d527c84!2sGopal%20Nagar%20Extn%2C%20Sarswati%20Enclave%2C%20Gopal%20Nagar%20Extension%2C%20Haibutpur%2C%20Delhi%2C%20110043!5e0!3m2!1sen!2sin!4v1734872380196!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                ></iframe>
-                <div className="absolute inset-0 pointer-events-none border-y border-stone/20"></div>
+            {/* SECTION 4 — MAP */}
+            <section className="bg-white">
+                <div className="bg-[#F8F6F2] py-[16px] text-center border-b border-[#E8E4DC]">
+                    <span className="font-body font-semibold text-[14px] text-[#C4472A]">📍 Find Us On Map</span>
+                </div>
+                <div className="w-full h-[420px] bg-stone/20 overflow-hidden">
+                    <iframe
+                        title="Location map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14232.062452296066!2d75.76008620888206!3d26.912440316499833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db45bb6276865%3A0xcb1b51e9b21f3f98!2sJhotwara%2C%20Jaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
             </section>
 
             <Footer />
+            <WhatsAppButton />
         </main>
     );
 }

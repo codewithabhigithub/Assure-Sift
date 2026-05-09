@@ -2,63 +2,71 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-import { Container, Section } from '../common/Layout';
-import { Reveal } from '../ui/Reveal';
-import aboutImg from '@/assets/movers_packers.jpg';
+import { Container } from '../common/Layout';
+import aboutImg1 from '@/assets/movers_packers.jpg';
+import aboutImg2 from '@/assets/instruction.jpg';
+import aboutImg3 from '@/assets/Deliver.jpeg';
+import aboutImg4 from '@/assets/Convenience.jpeg';
 
 export const AboutSection = () => {
   return (
-    <Section id="about" className="bg-bg-primary overflow-hidden pb-32">
+    <section id="about" className="bg-[#F8F6F2] py-[100px]">
       <Container>
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-32 items-center">
-          <div className="relative reveal">
-            <div className="relative rounded-[40px] overflow-hidden shadow-hover aspect-[4/5]">
-              <Image 
-                src={aboutImg} 
-                alt="Our Heritage" 
-                fill
-                className="object-cover scale-105 hover:scale-110 transition-transform duration-[2s]"
-              />
-              <div className="absolute inset-0 bg-accent/5 mix-blend-overlay"></div>
-            </div>
-            
-            {/* Editorial Floating Credentials */}
-            <div className="absolute -right-10 top-1/3 space-y-4 hidden xl:block">
-              <div className="bg-white px-8 py-5 rounded-[24px] shadow-hover text-[10px] font-bold uppercase tracking-[0.3em] text-accent border border-stone/20 flex items-center gap-4">
-                ISO 9001:2015
+        <div className="grid lg:grid-cols-[48%_48%] gap-[64px] items-center">
+          
+          {/* LEFT — Image Mosaic */}
+          <div className="grid grid-cols-2 gap-[12px]">
+            <div className="flex flex-col gap-[12px]">
+              <div className="relative h-[260px] rounded-[12px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+                <Image src={aboutImg1} alt="Mover" fill className="object-cover" />
               </div>
-              <div className="bg-white px-8 py-5 rounded-[24px] shadow-hover text-[10px] font-bold uppercase tracking-[0.3em] text-text-muted border border-stone/20 flex items-center gap-4">
-                IBA Approved
+              <div className="relative h-[200px] rounded-[12px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+                <Image src={aboutImg2} alt="Packing" fill className="object-cover" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-[12px]">
+              <div className="relative h-[228px] rounded-[12px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+                <Image src={aboutImg3} alt="Delivery" fill className="object-cover" />
+              </div>
+              <div className="relative h-[228px] rounded-[12px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+                <Image src={aboutImg4} alt="Logistics" fill className="object-cover" />
               </div>
             </div>
           </div>
 
-          <div className="reveal">
-            <span className="subtitle">The Assure Sift Heritage</span>
-            <div className="max-w-[520px]">
-              <h2 className="text-4xl lg:text-[58px] mb-10 leading-[0.95] font-display">
-                India&apos;s Largest <br />
-                & Most Awarded <br />
-                Relocation Group
-              </h2>
+          {/* RIGHT — Text */}
+          <div className="flex flex-col items-start">
+            <span className="font-body text-[10px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">ASSURE SIFT RELOCATION SERVICES</span>
+            <span className="font-body text-[13px] text-[#888] mt-1 mb-4">An ISO 9001:2008 & ISO 39001:2012 Certified Company</span>
+            
+            <h2 className="font-display font-bold text-[42px] text-[#1A1A2E] leading-[1.15] mb-6">
+              India&apos;s Largest and Most Awarded Movers
+            </h2>
+            
+            <div className="space-y-4 font-body text-[15px] text-[#555] leading-[1.85] mb-8">
+              <p>
+                Assure Sift has been a pioneer in the relocation industry for over 15 years, setting benchmarks in safety, efficiency, and customer satisfaction.
+              </p>
+              <p>
+                We provide a comprehensive suite of relocation services, from household shifting to complex industrial moves, all handled with professional expertise and care.
+              </p>
             </div>
             
-            <div className="space-y-8 text-text-muted leading-[1.85] font-body font-light text-base max-w-xl">
-              <p>
-                Assure Sift has been a trusted name in the logistics and relocation industry for over 15 years. Built on the principles of precision, hospitality, and unwavering safety.
-              </p>
-              <p>
-                Our philosophy is simple: relocation is not just about moving objects; it is about moving lives. We treat every piece of furniture as an artifact and every transition as a new chapter.
-              </p>
+            <a href="#" className="font-body font-medium text-[14px] text-[#C4472A] hover:underline mb-8">
+              Read More →
+            </a>
+            
+            <div className="flex flex-wrap gap-[10px]">
+              {["📦 Consignee", "🏠 Self-Storage", "🔒 Safety & Security", "📋 Specialized Packing"].map((pill, i) => (
+                <div key={i} className="bg-[#E8E4DC] rounded-[8px] px-[20px] py-[10px] font-body font-semibold text-[13px] text-[#1A1A2E]">
+                  {pill}
+                </div>
+              ))}
             </div>
-
-            <button className="flex items-center gap-4 text-accent font-bold mt-12 group text-[10px] uppercase tracking-[0.3em]">
-              Our Heritage Story <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </button>
           </div>
+
         </div>
       </Container>
-    </Section>
+    </section>
   );
 };

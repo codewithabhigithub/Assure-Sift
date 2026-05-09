@@ -1,37 +1,43 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Zap, Shield, Package, Wallet } from 'lucide-react';
-import { Container, Section } from '../common/Layout';
-import { StaggerContainer, StaggerItem } from '../ui/Reveal';
 
 const features = [
-  { icon: <Zap size={32} />, title: "Faster", desc: "Swift & Efficient Execution" },
-  { icon: <Shield size={32} />, title: "Reliable", desc: "Top-Tier Trust Standards" },
-  { icon: <Package size={32} />, title: "Safe", desc: "Premium Goods Protection" },
-  { icon: <Wallet size={32} />, title: "Affordable", desc: "Value-Driven Excellence" }
+  { icon: <Zap size={40} />, title: "Faster", desc: "Swift and efficient relocation services tailored to your schedule." },
+  { icon: <Shield size={40} />, title: "Reliable", desc: "Your trust is our priority. We handle your belongings with care." },
+  { icon: <Package size={40} />, title: "Safe", desc: "State-of-the-art packing techniques for maximum protection." },
+  { icon: <Wallet size={40} />, title: "Affordable", desc: "Competitive pricing without compromising on service quality." }
 ];
 
 export const FeaturesStrip = () => {
   return (
-    <Section className="py-24 bg-white border-y border-stone/50">
-      <Container>
-        <StaggerContainer>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-20 lg:gap-0">
-            {features.map((f, i) => (
-              <StaggerItem key={i}>
-                <div className={`flex flex-col lg:flex-row items-center lg:items-start text-center lg:text-left gap-8 px-12 ${i !== 3 ? 'lg:border-r border-stone/30' : ''}`}>
-                  <div className="text-accent bg-accent/5 p-4 rounded-2xl">{f.icon}</div>
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-display">{f.title}</h3>
-                    <p className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em]">{f.desc}</p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </div>
-        </StaggerContainer>
-      </Container>
-    </Section>
+    <section className="bg-white py-[60px]">
+      <div className="max-w-[1240px] mx-auto px-[40px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[40px]">
+          {features.map((feature, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="flex flex-col items-start"
+            >
+              <div className="text-[#C4472A]">
+                {React.cloneElement(feature.icon, { strokeWidth: 1.5 })}
+              </div>
+              <h3 className="font-body font-semibold text-[16px] text-[#1A1A2E] mt-4">
+                {feature.title}
+              </h3>
+              <p className="font-body text-[13px] text-[#888] mt-2 line-height-[1.7]">
+                {feature.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };

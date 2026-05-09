@@ -2,74 +2,54 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck, Award, Heart } from 'lucide-react';
-import { Container, Section } from '../common/Layout';
-import { Reveal, StaggerContainer, StaggerItem } from '../ui/Reveal';
-import courierMan from '@/assets/courier_man.webp';
+import { Container } from '../common/Layout';
+import courierMan from '@/assets/movers_packers.jpg';
 
 export const ReliableSection = () => {
   return (
-    <Section className="bg-white py-32">
+    <section className="bg-white py-[100px] relative overflow-hidden">
       <Container>
-        <div className="grid lg:grid-cols-2 gap-32 items-center">
-          <div className="relative reveal order-2 lg:order-1">
-            <div className="relative rounded-[40px] overflow-hidden shadow-hover aspect-square max-w-[560px] mx-auto lg:mx-0">
+        <div className="grid lg:grid-cols-[48%_48%] gap-[64px] items-center">
+          
+          {/* LEFT */}
+          <div className="relative">
+            <div className="relative w-full h-[500px] rounded-[16px] overflow-hidden">
               <Image 
                 src={courierMan} 
-                alt="Elite Reliability" 
+                alt="Reliable Moving Services" 
                 fill
-                className="object-cover scale-100 group-hover:scale-105 transition-transform duration-[2s]"
+                className="object-cover"
               />
-              <div className="absolute inset-0 bg-stone/5 mix-blend-multiply"></div>
-            </div>
-            
-            {/* Refined Satisfaction Seal */}
-            <div className="absolute top-1/2 -right-12 -translate-y-1/2 w-48 h-48 bg-white rounded-full border border-stone/50 border-dashed flex flex-col items-center justify-center text-center p-8 shadow-lg hidden xl:flex">
-              <div className="relative group">
-                <Heart size={32} className="text-accent/20 mb-3 group-hover:scale-110 transition-transform duration-700" fill="currentColor" />
-                <span className="block text-3xl font-display text-accent mb-1">100%</span>
-                <span className="text-[9px] font-bold uppercase tracking-[0.2em] leading-relaxed text-text-muted">Satisfaction <br /> Guaranteed</span>
+              
+              {/* Overlapping Badge */}
+              <div className="absolute bottom-[24px] left-[24px] bg-white/95 backdrop-blur-sm rounded-[12px] px-[20px] py-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
+                <span className="font-body font-semibold text-[13px] text-[#C4472A]">ASSURE SIFT</span>
               </div>
+            </div>
+
+            {/* FLOATING STAT CARD */}
+            <div className="absolute -bottom-10 -right-10 lg:bottom-10 lg:-right-12 bg-white rounded-[16px] p-[28px] shadow-[0_8px_40px_rgba(0,0,0,0.1)] text-center border-[2px] border-dashed border-[#E8E4DC] min-w-[180px] z-20">
+              <h4 className="font-display font-bold text-[48px] text-[#C4472A] leading-tight">100%</h4>
+              <p className="font-body text-[14px] text-[#1A1A2E] leading-[1.5]">Satisfaction<br />Guaranteed</p>
             </div>
           </div>
 
-          <div className="reveal order-1 lg:order-2">
-            <span className="subtitle">Operational Excellence</span>
-            <div className="max-w-[480px]">
-              <h2 className="text-4xl lg:text-[58px] mb-10 leading-[1.05] font-display">
-                Reliability <br />
-                as a <span className="text-accent italic font-display">Philosophy</span>
-              </h2>
-            </div>
-            <p className="text-base lg:text-lg text-text-muted mb-12 font-body font-light leading-[1.85] max-w-[480px]">
-              Our bespoke relocation methodology ensures that every detail, from the first consultation to the final placement, is executed with the quiet confidence of industry masters.
+          {/* RIGHT */}
+          <div className="flex flex-col items-start">
+            <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A] mb-2">WHY WE&apos;RE BEST</span>
+            <h2 className="font-display font-bold text-[42px] text-[#1A1A2E] leading-tight mb-6">
+              Reliable and Efficient Moving Services
+            </h2>
+            <p className="font-body text-[15px] text-[#555] leading-[1.85] mb-8">
+              At Assure Sift, we understand that moving is more than just transporting items—it&apos;s about transitioning your life. Our team of professionals is dedicated to ensuring a stress-free experience with maximum safety and precision.
             </p>
-            
-            <StaggerContainer>
-              <div className="grid grid-cols-2 gap-10 mb-12 max-w-[480px]">
-                <StaggerItem>
-                  <div className="flex flex-col gap-3">
-                    <ShieldCheck size={28} className="text-accent" />
-                    <h4 className="text-lg font-display">Global Protection</h4>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted">IBA Approved Standard</p>
-                  </div>
-                </StaggerItem>
-                <StaggerItem>
-                  <div className="flex flex-col gap-3">
-                    <Award size={28} className="text-accent" />
-                    <h4 className="text-lg font-display">Elite Personnel</h4>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted">Certified Master Packers</p>
-                  </div>
-                </StaggerItem>
-              </div>
-            </StaggerContainer>
-
-            <button className="btn-primary py-5 px-10 text-[10px] tracking-[0.2em] flex items-center gap-3">
-              Begin Your Journey <ArrowRight size={18} />
+            <button className="bg-[#C4472A] text-white font-body font-semibold text-[15px] px-[32px] py-[14px] rounded-[50px] hover:bg-[#A63A22] transition-colors">
+              Book Now →
             </button>
           </div>
+
         </div>
       </Container>
-    </Section>
+    </section>
   );
 };

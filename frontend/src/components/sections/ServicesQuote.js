@@ -2,113 +2,83 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Building2, Globe, Car, Bike, Lock, Palette, ShoppingBag, Truck, RotateCcw, ArrowRight } from 'lucide-react';
-import { Container, Section } from '../common/Layout';
-import { Reveal, StaggerContainer, StaggerItem } from '../ui/Reveal';
+import { 
+  Home, Building2, Package, Truck, 
+  Warehouse, ShieldCheck, MapPin, 
+  Settings, Clock, Briefcase, Globe, Headphones 
+} from 'lucide-react';
+import { Container } from '../common/Layout';
 
 const services = [
-  { icon: <Home size={28} />, name: "Household Moving" },
-  { icon: <Building2 size={28} />, name: "Office Moving" },
-  { icon: <Globe size={28} />, name: "International Moving" },
-  { icon: <Car size={28} />, name: "Car Moving" },
-  { icon: <Bike size={28} />, name: "Bike Moving" },
-  { icon: <Lock size={28} />, name: "Secure Storage" },
-  { icon: <Palette size={28} />, name: "Fine Arts Moving" },
-  { icon: <ShoppingBag size={28} />, name: "Commercial Moving" },
-  { icon: <Truck size={28} />, name: "Courier" },
-  { icon: <Truck size={28} />, name: "Truck Rental" },
-  { icon: <Truck size={28} />, name: "Last Mile Delivery" },
-  { icon: <Truck size={28} />, name: "ODC Consignment" },
+  { icon: Home, title: "Household Shifting" },
+  { icon: Building2, title: "Office Shifting" },
+  { icon: Package, title: "Local Relocation" },
+  { icon: Truck, title: "Car Shifting" },
+  { icon: Warehouse, title: "Warehousing" },
+  { icon: ShieldCheck, title: "Transit Insurance" },
+  { icon: MapPin, title: "Domestic Shifting" },
+  { icon: Briefcase, title: "Commercial Moving" },
+  { icon: Clock, title: "Quick Move" },
+  { icon: Settings, title: "Fine Art Moving" },
+  { icon: Globe, title: "Int'l Shifting" },
+  { icon: Headphones, title: "24/7 Support" }
 ];
 
 export const ServicesQuote = () => {
   return (
-    <Section id="services" className="bg-bg-primary overflow-hidden">
-      <Container>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-24 reveal">
-          <div className="max-w-2xl">
-            <span className="subtitle">Luxury Logistics Solutions</span>
-            <h2 className="text-4xl lg:text-[58px] leading-[1.05] font-display">Crafting Seamless Transitions</h2>
-          </div>
-          <Link href="#" className="flex items-center gap-3 text-accent font-bold group text-[10px] uppercase tracking-[0.2em]">
-            Explore All Services <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-
-        <div className="grid lg:grid-cols-[1fr_0.85fr] gap-20 lg:gap-32 items-start">
-          <StaggerContainer>
-            <div className="grid grid-cols-2 gap-6">
-              {services.map((service, i) => (
-                <StaggerItem key={i}>
-                  <motion.div 
-                    whileHover={{ y: -6, backgroundColor: '#C4472A', color: '#FFFFFF' }}
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    className="bg-white p-10 rounded-[32px] shadow-soft flex flex-col items-center gap-8 text-center group transition-colors duration-500 border border-stone/10"
-                  >
-                    <div className="text-accent group-hover:text-white transition-colors duration-500">
-                      {service.icon}
-                    </div>
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] px-2">{service.name}</span>
-                  </motion.div>
-                </StaggerItem>
+    <section id="services" className="bg-[#F8F6F2] py-24">
+      <div className="max-container">
+        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12">
+          
+          {/* LEFT: Services Grid */}
+          <div>
+            <div className="mb-10">
+              <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">OUR SERVICES</span>
+              <h2 className="font-display font-bold text-4xl text-[#1A1A2E] mt-2 leading-tight">Our Services</h2>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {services.map((s, i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ y: -5 }}
+                  className="bg-white rounded-xl p-5 flex flex-col items-center justify-center gap-4 shadow-sm border border-[#E8E4DC]/50 min-h-[140px]"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#F8F6F2] flex items-center justify-center text-[#C4472A]">
+                    <s.icon size={24} />
+                  </div>
+                  <h4 className="service-card-label font-body font-semibold text-[#1A1A2E]">
+                    {s.title}
+                  </h4>
+                </motion.div>
               ))}
             </div>
-          </StaggerContainer>
+          </div>
 
-          <Reveal delay={0.2} width="100%">
-            <div className="bg-white p-12 lg:p-20 rounded-[40px] shadow-hover border border-stone/10 sticky top-32">
-              <div className="mb-12">
-                <span className="subtitle">Instant Response</span>
-                <h3 className="text-4xl lg:text-[48px] mb-6 leading-[1.05] font-display">
-                  Request Your <br />
-                  <span className="text-accent italic font-display">Bespoke</span> Quote
-                </h3>
-                <p className="text-text-muted font-light text-sm max-w-[320px]">Experience relocation handled with the precision of a fine watch.</p>
-              </div>
+          {/* RIGHT: Quote Form */}
+          <div className="lg:sticky lg:top-24 h-fit">
+            <div className="bg-white rounded-2xl p-8 shadow-xl border border-[#E8E4DC]">
+              <h3 className="font-display font-bold text-2xl text-[#1A1A2E] mb-2">Get a Free Moving Quote</h3>
+              <p className="font-body text-sm text-[#777] mb-8">Fill the form below to receive a personalized quote.</p>
               
-              <div className="space-y-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted px-1">Full Name</label>
-                    <input type="text" placeholder="Johnathan Doe" className="w-full bg-stone/5 border-b border-stone/30 px-4 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-xl" />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted px-1">Contact Number</label>
-                    <input type="tel" placeholder="+91 0000 000 000" className="w-full bg-stone/5 border-b border-stone/30 px-4 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-xl" />
-                  </div>
+              <form className="space-y-6">
+                <input type="text" placeholder="Full Name" className="w-full border-b border-[#E8E4DC] py-2 focus:border-[#C4472A] outline-none font-body text-sm transition-colors" />
+                <input type="email" placeholder="Email Address" className="w-full border-b border-[#E8E4DC] py-2 focus:border-[#C4472A] outline-none font-body text-sm transition-colors" />
+                <div className="grid grid-cols-2 gap-4">
+                  <input type="text" placeholder="From City" className="w-full border-b border-[#E8E4DC] py-2 focus:border-[#C4472A] outline-none font-body text-sm transition-colors" />
+                  <input type="text" placeholder="To City" className="w-full border-b border-[#E8E4DC] py-2 focus:border-[#C4472A] outline-none font-body text-sm transition-colors" />
                 </div>
-                <div className="space-y-3">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted px-1">Origin City</label>
-                  <select className="w-full bg-stone/5 border-b border-stone/30 px-4 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-xl appearance-none cursor-pointer">
-                    <option value="">Select Origin</option>
-                    <option value="jaipur">Jaipur (HQ)</option>
-                    <option value="mumbai">Mumbai</option>
-                    <option value="delhi">Delhi</option>
-                  </select>
-                </div>
-                <div className="space-y-3">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted px-1">Destination City</label>
-                  <select className="w-full bg-stone/5 border-b border-stone/30 px-4 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-xl appearance-none cursor-pointer">
-                    <option value="">Select Destination</option>
-                    <option value="bangalore">Bangalore</option>
-                    <option value="hyderabad">Hyderabad</option>
-                    <option value="pune">Pune</option>
-                  </select>
-                </div>
+                <input type="tel" placeholder="Phone Number" className="w-full border-b border-[#E8E4DC] py-2 focus:border-[#C4472A] outline-none font-body text-sm transition-colors" />
                 
-                <div className="pt-8 flex flex-col sm:flex-row items-center gap-8">
-                  <button className="btn-primary flex-1 w-full py-5 text-[11px] tracking-[0.2em]">Initiate Concierge Request</button>
-                  <button className="text-text-muted hover:text-accent transition-colors flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.2em]">
-                    <RotateCcw size={14} /> Reset
-                  </button>
-                </div>
-              </div>
+                <button className="w-full bg-[#C4472A] text-white font-semibold py-4 rounded-full mt-4 hover:bg-[#A63A22] transition-colors shadow-lg shadow-[#C4472A]/20">
+                  Get Free Quote →
+                </button>
+              </form>
             </div>
-          </Reveal>
+          </div>
+
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
 };
-
-const Link = ({ children, href, className }) => <a href={href} className={className}>{children}</a>;
