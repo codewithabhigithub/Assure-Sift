@@ -24,7 +24,8 @@ import { Container } from "@/components/common/Layout";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Assets
-import movers_packers from '@/assets/movers_packers.jpg';
+// import movers_packers from '@/assets/movers_packers.jpg';
+import about from "@/assets/about.png";
 import instruction from '@/assets/instruction.jpg';
 
 const Counter = ({ value }) => {
@@ -103,7 +104,7 @@ export default function AboutUsPage() {
               className="relative"
             >
               <div className="relative w-full h-[480px] rounded-[16px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.10)]">
-                <Image src={movers_packers} alt="Assure Sift Team" fill className="object-cover" />
+                <Image src={about} alt="Assure Sift Team" fill className="object-cover" />
                 {/* Floating badge */}
                 <div className="absolute bottom-[24px] left-[24px] bg-white rounded-[12px] px-[20px] py-[14px] shadow-lg">
                   <span className="font-body font-semibold text-[13px] text-[#C4472A] flex items-center gap-2">

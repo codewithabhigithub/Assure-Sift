@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import api from '@/services/api';
+import { FaArrowRight, FaUndo } from 'react-icons/fa';
 
 class MapErrorBoundary extends React.Component {
     constructor(props) {
@@ -136,8 +137,15 @@ const contentOptions = [
 
 const LIBRARIES = ['places'];
 
-const UserForm2 = () => {
-    const [selectedOption, setSelectedOption] = useState('car');
+const UserForm2 = ({ selectedService, compact = false }) => {
+    const [selectedOption, setSelectedOption] = useState(selectedService || 'car');
+    const [prevSelectedService, setPrevSelectedService] = useState(selectedService);
+
+    if (selectedService !== prevSelectedService) {
+        setPrevSelectedService(selectedService);
+        setSelectedOption(selectedService || 'car');
+    }
+
     const [searchTerm, setSearchTerm] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -218,7 +226,7 @@ const UserForm2 = () => {
         };
 
         try {
-            await api.post('/user', updatedFormData);
+            await api.post('/users/createEnquiry', updatedFormData);
             alert('User data submitted successfully');
             handleReset();
         } catch (error) {
@@ -250,28 +258,32 @@ const UserForm2 = () => {
         }
     };
 
+    // Input styling
+    const inputClass = "w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all placeholder:text-gray-400";
+    const labelClass = "block text-xs font-semibold text-gray-600 mb-1.5";
+
     const renderFormFields = () => {
         const commonDateAndTime = (
-            <div className="flex flex-wrap -mx-2 mb-4">
-                <div className="w-full md:w-1/2 px-2 mb-4">
-                    <label className="block text-sm font-bold text-gray-700 mb-1">Pickup Date</label>
+            <div className="grid grid-cols-2 gap-3 mb-3">
+                <div>
+                    <label className={labelClass}>Move Type</label>
+                    <select
+                        name="purpose"
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                        className={inputClass}
+                    >
+                        {options.map(opt => <option key={opt.id} value={opt.id}>{opt.label}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label className={labelClass}>Move Date</label>
                     <input
                         type="date"
                         name="pickup_date"
                         value={formData.pickup_date}
                         onChange={handleChange}
-                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
-                        required
-                    />
-                </div>
-                <div className="w-full md:w-1/2 px-2 mb-4">
-                    <label className="block text-sm font-bold text-gray-700 mb-1">Pickup Time</label>
-                    <input
-                        type="time"
-                        name="pickup_time"
-                        value={formData.pickup_time}
-                        onChange={handleChange}
-                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
+                        className={inputClass}
                         required
                     />
                 </div>
@@ -279,64 +291,30 @@ const UserForm2 = () => {
         );
 
         const commonAddresses = (
-            <div className="flex flex-wrap -mx-2 mb-4">
-                <div className="w-full md:w-1/2 px-2 mb-4">
-                    <label className="block text-sm font-bold text-gray-700 mb-1">Pickup Address</label>
-                    <MapErrorBoundary fallback={
-                        <input
-                            type="text"
-                            name="pickup_address"
-                            value={formData.pickup_address}
-                            onChange={handleChange}
-                            placeholder="Enter Pickup Location"
-                            className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
-                            required
-                        />
-                    }>
-                        <Autocomplete
-                            onLoad={(autocomplete) => (autocompletePickupRef.current = autocomplete)}
-                            onPlaceChanged={() => handleAddressChange('pickup_address', autocompletePickupRef.current.getPlace())}
-                        >
-                            <input
-                                type="text"
-                                name="pickup_address"
-                                value={formData.pickup_address}
-                                onChange={handleChange}
-                                placeholder="Enter Pickup Location"
-                                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
-                                required
-                            />
-                        </Autocomplete>
-                    </MapErrorBoundary>
+            <div className="space-y-3 mb-3">
+                <div>
+                    <label className={labelClass}>Moving From</label>
+                    <input
+                        type="text"
+                        name="pickup_address"
+                        value={formData.pickup_address}
+                        onChange={handleChange}
+                        placeholder="Enter Pickup Location"
+                        className={inputClass}
+                        required
+                    />
                 </div>
-                <div className="w-full md:w-1/2 px-2 mb-4">
-                    <label className="block text-sm font-bold text-gray-700 mb-1">Drop Address</label>
-                    <MapErrorBoundary fallback={
-                        <input
-                            type="text"
-                            name="drop_address"
-                            value={formData.drop_address}
-                            onChange={handleChange}
-                            placeholder="Enter Drop Location"
-                            className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
-                            required
-                        />
-                    }>
-                        <Autocomplete
-                            onLoad={(autocomplete) => (autocompleteDropRef.current = autocomplete)}
-                            onPlaceChanged={() => handleAddressChange('drop_address', autocompleteDropRef.current.getPlace())}
-                        >
-                            <input
-                                type="text"
-                                name="drop_address"
-                                value={formData.drop_address}
-                                onChange={handleChange}
-                                placeholder="Enter Drop Location"
-                                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all"
-                                required
-                            />
-                        </Autocomplete>
-                    </MapErrorBoundary>
+                <div>
+                    <label className={labelClass}>Moving To</label>
+                    <input
+                        type="text"
+                        name="drop_address"
+                        value={formData.drop_address}
+                        onChange={handleChange}
+                        placeholder="Enter Drop Location"
+                        className={inputClass}
+                        required
+                    />
                 </div>
             </div>
         );
@@ -345,21 +323,21 @@ const UserForm2 = () => {
             case 'household':
                 return (
                     <>
-                        <div className="mb-4">
-                            <label className="block text-sm font-bold text-gray-700 mb-1">Apartment Size</label>
+                        <div className="mb-3">
+                            <label className={labelClass}>Apartment Size</label>
                             <select
                                 name="apartmentSize"
                                 value={formData.apartmentSize}
                                 onChange={handleChange}
-                                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                className={inputClass}
                                 required
                             >
                                 <option value="">Select Apartment Size</option>
                                 {apartmentSizes.map(size => <option key={size.value} value={size.value}>{size.label}</option>)}
                             </select>
                         </div>
-                        {commonDateAndTime}
                         {commonAddresses}
+                        {commonDateAndTime}
                     </>
                 );
             case 'office':
@@ -369,41 +347,41 @@ const UserForm2 = () => {
             case 'odc_consignment':
                 return (
                     <>
-                        <div className="flex flex-wrap -mx-2 mb-4">
-                            <div className="w-full md:w-1/2 px-2 mb-4">
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Company Name</label>
+                        <div className="grid grid-cols-2 gap-3 mb-3">
+                            <div>
+                                <label className={labelClass}>Company Name</label>
                                 <input
                                     type="text"
                                     name="companyName"
                                     value={formData.companyName}
                                     onChange={handleChange}
                                     placeholder="Company Name"
-                                    className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                    className={inputClass}
                                     required
                                 />
                             </div>
                             {selectedOption === 'commercial' || selectedOption === 'odc_consignment' ? (
-                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                    <label className="block text-sm font-bold text-gray-700 mb-1">Material Type</label>
+                                <div>
+                                    <label className={labelClass}>Material Type</label>
                                     <input
                                         type="text"
                                         name="materialType"
                                         value={formData.materialType}
                                         onChange={handleChange}
                                         placeholder="Material Type"
-                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                        className={inputClass}
                                         required
                                     />
                                 </div>
                             ) : null}
                             {selectedOption === 'truck' ? (
-                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                    <label className="block text-sm font-bold text-gray-700 mb-1">Truck Type</label>
+                                <div>
+                                    <label className={labelClass}>Truck Type</label>
                                     <select
                                         name="truckType"
                                         value={formData.truckType}
                                         onChange={handleChange}
-                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                        className={inputClass}
                                         required
                                     >
                                         <option value="">Select Truck Type</option>
@@ -412,61 +390,61 @@ const UserForm2 = () => {
                                 </div>
                             ) : null}
                         </div>
-                        {commonDateAndTime}
                         {commonAddresses}
+                        {commonDateAndTime}
                     </>
                 );
             case 'car':
             case 'bike':
                 return (
                     <>
-                        <div className="mb-4">
-                            <label className="block text-sm font-bold text-gray-700 mb-1">{selectedOption === 'car' ? 'Car Model' : 'Bike Model'}</label>
+                        <div className="mb-3">
+                            <label className={labelClass}>{selectedOption === 'car' ? 'Car Model' : 'Bike Model'}</label>
                             <input
                                 type="text"
                                 name={selectedOption === 'car' ? 'carModel' : 'bikeModel'}
                                 value={selectedOption === 'car' ? formData.carModel : formData.bikeModel}
                                 onChange={handleChange}
                                 placeholder={`Enter ${selectedOption} Model`}
-                                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                className={inputClass}
                                 required
                             />
                         </div>
-                        {commonDateAndTime}
                         {commonAddresses}
+                        {commonDateAndTime}
                     </>
                 );
             case 'courier':
                 return (
                     <>
-                        <div className="flex flex-wrap -mx-2 mb-4">
-                            <div className="w-full md:w-1/2 px-2 mb-4">
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Parcel Weight (g)</label>
+                        <div className="grid grid-cols-2 gap-3 mb-3">
+                            <div>
+                                <label className={labelClass}>Parcel Weight (g)</label>
                                 <input
                                     type="number"
                                     name="parcel_weight"
                                     value={formData.parcel_weight}
                                     onChange={handleChange}
                                     placeholder="Weight in grams"
-                                    className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                    className={inputClass}
                                     required
                                 />
                             </div>
-                            <div className="w-full md:w-1/2 px-2 mb-4">
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Measurements (LxWxH)</label>
+                            <div>
+                                <label className={labelClass}>Measurements (LxWxH)</label>
                                 <input
                                     type="text"
                                     name="measurement"
                                     value={formData.measurement}
                                     onChange={handleChange}
                                     placeholder="e.g., 10x20x30"
-                                    className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                    className={inputClass}
                                     required
                                 />
                             </div>
                         </div>
-                        <div className="mb-4 relative">
-                            <label className="block text-sm font-bold text-gray-700 mb-1">Select Content</label>
+                        <div className="mb-3 relative">
+                            <label className={labelClass}>Select Content</label>
                             <input
                                 type="text"
                                 name="content"
@@ -475,44 +453,110 @@ const UserForm2 = () => {
                                 onFocus={handleInputFocus}
                                 onBlur={handleInputBlur}
                                 placeholder="Search or select content"
-                                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
+                                className={inputClass}
                             />
                             {isDropdownOpen && (
-                                <ul className="absolute z-10 mt-1 w-full bg-white border rounded-lg shadow-xl max-h-60 overflow-y-auto">
+                                <ul className="absolute z-10 mt-1 w-full bg-white border rounded-xl shadow-xl max-h-48 overflow-y-auto">
                                     {filteredOptions.map(option => (
-                                        <li key={option.value} onClick={() => handleSelectOption(option)} className="p-3 hover:bg-gray-100 cursor-pointer text-sm">
+                                        <li key={option.value} onClick={() => handleSelectOption(option)} className="p-2.5 hover:bg-cream text-sm cursor-pointer border-b border-gray-50 last:border-0">
                                             {option.label}
                                         </li>
                                     ))}
                                 </ul>
                             )}
                         </div>
-                        {commonDateAndTime}
                         {commonAddresses}
+                        {commonDateAndTime}
                     </>
                 );
             default:
                 return (
                     <>
-                        {commonDateAndTime}
                         {commonAddresses}
+                        {commonDateAndTime}
                     </>
                 );
         }
     };
 
+    // Compact mode for homepage sidebar
+    if (compact) {
+        return (
+                <div className="bg-white rounded-2xl border border-gray-100 card-shadow overflow-hidden h-fit flex flex-col">
+                    <div className="px-6 pt-6 pb-4 flex-shrink-0">
+                        <h3 className="text-xl font-bold text-navy mb-0.5" style={{ fontFamily: 'var(--font-playfair), serif' }}>
+                            Get a <span className="italic text-brand">Free</span>
+                        </h3>
+                        <h3 className="text-xl font-bold text-navy" style={{ fontFamily: 'var(--font-playfair), serif' }}>
+                            Moving Quote
+                        </h3>
+                    </div>
+                    <form onSubmit={handleSubmit} className="px-6 pb-6 flex-grow flex flex-col">
+                        <div className="flex-grow space-y-3">
+                            {/* Name & Phone */}
+                            <div className="grid grid-cols-2 gap-3">
+                                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" className={inputClass} required />
+                                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" className={inputClass} required />
+                            </div>
+                            {/* Email */}
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className={inputClass} required />
+                            
+                            {/* Dynamic fields */}
+                            {renderFormFields()}
+                        </div>
+
+                        {/* CAPTCHA & Buttons at the bottom */}
+                        <div className="mt-auto pt-4 space-y-4">
+                            {/* CAPTCHA */}
+                            <div className="flex justify-center w-full overflow-hidden">
+                                <div className="scale-90 sm:scale-100 origin-center">
+                                    <ReCAPTCHA
+                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LcFv90sAAAAABqmEiEtTxgL4rMR_Lo7tx6FkHuN"}
+                                        onChange={onCaptchaChange}
+                                        ref={recaptchaRef}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Buttons */}
+                            <div className="flex gap-3">
+                                <button
+                                    type="submit"
+                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 transition-all duration-300 ease-in-out ${
+                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand-dark shadow-sm'
+                                    }`}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Processing...' : 'Submit'}
+                                    {!isLoading && <FaArrowRight className="text-xs" />}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleReset}
+                                    className="px-5 py-3.5 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all text-sm flex items-center justify-center gap-1.5 border border-gray-200"
+                                    disabled={isLoading}
+                                >
+                                    <FaUndo className="text-[10px]" /> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        );
+    }
+
+    // Full mode (standalone page)
     return (
-        <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} libraries={LIBRARIES}>
             <div className="w-full flex flex-col items-center py-12">
                 <div className="w-full max-w-5xl px-4 flex flex-wrap justify-center gap-3 mb-10">
                     {options.map((option) => (
                         <button
                             key={option.id}
                             onClick={() => handleOptionClick(option.id)}
-                            className={`flex flex-col items-center justify-center p-4 rounded-xl shadow-sm border-2 transition-all-custom w-28 h-28 ${
+                            className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-300 ease-in-out w-28 h-28 ${
                                 selectedOption === option.id 
-                                ? 'bg-brand/10 border-brand scale-105 shadow-md' 
-                                : 'bg-white border-transparent hover:border-brand/30 hover:scale-105'
+                                ? 'bg-brand/10 border-brand scale-105 card-shadow' 
+                                : 'bg-white border-gray-100 hover:border-brand/30 hover:scale-105'
                             }`}
                         >
                             <span className="text-3xl mb-2">{option.icon}</span>
@@ -524,67 +568,43 @@ const UserForm2 = () => {
                 </div>
 
                 <div className="w-full max-w-4xl px-4">
-                    <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-                        <div className="bg-brand py-6 text-center text-white">
-                            <h2 className="text-2xl font-outfit font-bold">
+                    <div className="bg-white rounded-2xl card-shadow overflow-hidden border border-gray-100">
+                        <div className="bg-brand py-5 text-center text-white">
+                            <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair), serif' }}>
                                 Get a Free <span className="underline decoration-white/30">{options.find(o => o.id === selectedOption)?.label}</span> Quote
                             </h2>
                         </div>
-                        <form onSubmit={handleSubmit} className="p-8 lg:p-12 space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="space-y-1">
-                                    <label className="block text-sm font-bold text-gray-700">Name</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        placeholder="Full Name"
-                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
-                                        required
-                                    />
+                        <form onSubmit={handleSubmit} className="p-6 lg:p-10 space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label className={labelClass}>Name</label>
+                                    <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" className={inputClass} required />
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="block text-sm font-bold text-gray-700">Phone</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        placeholder="Mobile Number"
-                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
-                                        required
-                                    />
+                                <div>
+                                    <label className={labelClass}>Phone</label>
+                                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Mobile Number" className={inputClass} required />
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="block text-sm font-bold text-gray-700">Email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="Email Address"
-                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand outline-none"
-                                        required
-                                    />
+                                <div>
+                                    <label className={labelClass}>Email</label>
+                                    <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" className={inputClass} required />
                                 </div>
                             </div>
 
                             {renderFormFields()}
 
-                            <div className="flex justify-center py-4">
+                            <div className="flex justify-center py-3">
                                 <ReCAPTCHA
-                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LcNBTUqAAAAANEVacfo2ApjLvEImEf8OeSlygJE"}
+                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LcFv90sAAAAABqmEiEtTxgL4rMR_Lo7tx6FkHuN"}
                                     onChange={onCaptchaChange}
                                     ref={recaptchaRef}
                                 />
                             </div>
 
-                            <div className="flex gap-4">
+                            <div className="flex gap-3">
                                 <button
                                     type="submit"
-                                    className={`flex-1 p-4 rounded-xl font-bold text-white transition-all-custom ${
-                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand-dark shadow-lg hover:shadow-xl'
+                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white transition-all duration-300 ease-in-out ${
+                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand-dark'
                                     }`}
                                     disabled={isLoading}
                                 >
@@ -593,7 +613,7 @@ const UserForm2 = () => {
                                 <button
                                     type="button"
                                     onClick={handleReset}
-                                    className="px-8 p-4 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                                    className="px-6 py-3.5 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all"
                                     disabled={isLoading}
                                 >
                                     Reset
@@ -603,7 +623,6 @@ const UserForm2 = () => {
                     </div>
                 </div>
             </div>
-        </LoadScript>
     );
 };
 

@@ -3,7 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import banner from '@/assets/banner_img_1.svg';
+// import banner from '@/assets/banner_img_1.svg';
+import hero from '@/assets/hero.png';
 
 export const Hero = () => {
   return (
@@ -57,7 +58,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[#555] text-sm"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[#555] text-sm "
           >
             <div className="flex items-center gap-2"><span>⏱</span> Available 24/7</div>
             <div className="hidden sm:block w-px h-4 bg-[#E8E4DC]"></div>
@@ -74,11 +75,11 @@ export const Hero = () => {
           transition={{ duration: 0.8 }}
           className="relative h-[400px] lg:h-[600px] flex items-center justify-center"
         >
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full rounded-[2.5rem]">
             <Image 
-              src={banner} 
+              src={hero} 
               alt="Assure Sift Relocation" 
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full rounded-[2.5rem]"
               priority
             />
             

@@ -3,7 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { Container } from '../common/Layout';
-import courierMan from '@/assets/movers_packers.jpg';
+// import courierMan from '@/assets/movers_packers.jpg';
+import moving from '@/assets/moving.png';
 
 export const ReliableSection = () => {
   return (
@@ -15,7 +16,7 @@ export const ReliableSection = () => {
           <div className="relative">
             <div className="relative w-full h-[500px] rounded-[16px] overflow-hidden">
               <Image 
-                src={courierMan} 
+                src={moving} 
                 alt="Reliable Moving Services" 
                 fill
                 className="object-cover"
