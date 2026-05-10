@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 // import banner from '@/assets/banner_img_1.svg';
 import hero from '@/assets/hero.png';
@@ -46,12 +47,12 @@ export const Hero = () => {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap gap-4 mb-10"
           >
-            <button className="bg-[#C4472A] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[#A63A22] transition-colors shadow-lg shadow-[#C4472A]/20">
+            <Link href="/#services" className="bg-[#C4472A] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[#A63A22] transition-colors shadow-lg shadow-[#C4472A]/20 inline-block text-center">
               Book Now →
-            </button>
-            <button className="bg-transparent border-2 border-[#1A1A2E] text-[#1A1A2E] font-semibold px-8 py-3.5 rounded-full hover:bg-[#1A1A2E] hover:text-white transition-all">
+            </Link>
+            <Link href="/about_us" className="bg-transparent border-2 border-[#1A1A2E] text-[#1A1A2E] font-semibold px-8 py-3.5 rounded-full hover:bg-[#1A1A2E] hover:text-white transition-all inline-block text-center">
               Learn More →
-            </button>
+            </Link>
           </motion.div>
           
           <motion.div 

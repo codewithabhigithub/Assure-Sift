@@ -60,10 +60,15 @@ export const Footer = () => {
           <div>
             <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-6">COMPANY</h4>
             <ul className="flex flex-col gap-3">
-              {['Team', 'Career', 'Blog', 'Admin Login'].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
-                    {item}
+              {[
+                { name: 'Team', href: '#' },
+                { name: 'Career', href: '#' },
+                { name: 'Blog', href: '/blog' },
+                { name: 'Admin Login', href: '/login' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
+                    {item.name}
                   </Link>
                 </li>
               ))}

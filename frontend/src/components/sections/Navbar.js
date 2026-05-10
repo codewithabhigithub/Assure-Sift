@@ -62,7 +62,7 @@ export const Navbar = () => {
         {/* CTA Button */}
         <div className="hidden lg:block">
           <Link 
-            href="/#quote" 
+            href="/#services" 
             className="bg-[#C4472A] text-white font-body font-semibold text-[14px] px-[28px] py-[12px] rounded-[50px] hover:bg-[#A63A22] transition-colors flex items-center gap-2"
           >
             Get Free Quotation →
@@ -98,7 +98,7 @@ export const Navbar = () => {
                   </Link>
                 ))}
                 <Link 
-                  href="/#quote" 
+                  href="/#services" 
                   className="bg-[#C4472A] text-white text-center py-4 rounded-[50px] font-semibold"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

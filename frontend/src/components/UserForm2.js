@@ -259,7 +259,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
     };
 
     // Input styling
-    const inputClass = "w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all placeholder:text-gray-400";
+    const inputClass = "w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#C4472A]/20 focus:border-[#C4472A] outline-none transition-all placeholder:text-gray-400";
     const labelClass = "block text-xs font-semibold text-gray-600 mb-1.5";
 
     const renderFormFields = () => {
@@ -496,7 +496,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                 <div className="bg-white rounded-2xl border border-gray-100 card-shadow overflow-hidden h-fit flex flex-col">
                     <div className="px-6 pt-6 pb-4 flex-shrink-0">
                         <h3 className="text-xl font-bold text-navy mb-0.5" style={{ fontFamily: 'var(--font-playfair), serif' }}>
-                            Get a <span className="italic text-brand">Free</span>
+                            Get a <span className="italic text-[#C4472A]">Free</span>
                         </h3>
                         <h3 className="text-xl font-bold text-navy" style={{ fontFamily: 'var(--font-playfair), serif' }}>
                             Moving Quote
@@ -534,7 +534,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                                 <button
                                     type="submit"
                                     className={`flex-1 py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 transition-all duration-300 ease-in-out ${
-                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand-dark shadow-sm'
+                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22] shadow-sm'
                                     }`}
                                     disabled={isLoading}
                                 >
@@ -568,12 +568,12 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                             onClick={() => handleOptionClick(option.id)}
                             className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-300 ease-in-out w-28 h-28 ${
                                 selectedOption === option.id 
-                                ? 'bg-brand/10 border-brand scale-105 card-shadow' 
-                                : 'bg-white border-gray-100 hover:border-brand/30 hover:scale-105'
+                                ? 'bg-[#C4472A]/10 border-[#C4472A] scale-105 card-shadow' 
+                                : 'bg-white border-gray-100 hover:border-[#C4472A]/30 hover:scale-105'
                             }`}
                         >
                             <span className="text-3xl mb-2">{option.icon}</span>
-                            <span className={`text-[10px] font-bold uppercase tracking-tighter ${selectedOption === option.id ? 'text-brand' : 'text-gray-500'}`}>
+                            <span className={`text-[10px] font-bold uppercase tracking-tighter ${selectedOption === option.id ? 'text-[#C4472A]' : 'text-gray-500'}`}>
                                 {option.label}
                             </span>
                         </button>
@@ -582,7 +582,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
 
                 <div className="w-full max-w-4xl px-4">
                     <div className="bg-white rounded-2xl card-shadow overflow-hidden border border-gray-100">
-                        <div className="bg-brand py-5 text-center text-white">
+                        <div className="bg-[#C4472A] py-5 text-center text-white">
                             <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair), serif' }}>
                                 Get a Free <span className="underline decoration-white/30">{options.find(o => o.id === selectedOption)?.label}</span> Quote
                             </h2>
@@ -617,7 +617,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                                 <button
                                     type="submit"
                                     className={`flex-1 py-3.5 rounded-xl font-bold text-white transition-all duration-300 ease-in-out ${
-                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand hover:bg-brand-dark'
+                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22]'
                                     }`}
                                     disabled={isLoading}
                                 >

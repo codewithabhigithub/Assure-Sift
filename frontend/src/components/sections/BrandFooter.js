@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container } from '../common/Layout';
 import { Users } from 'lucide-react';
 import sbi from '@/assets/SBI BANK.png';
@@ -50,7 +51,7 @@ export const ClientsMarquee = () => {
 
 export const JoinUsBanner = () => {
   return (
-    <div className="max-w-[1240px] mx-auto px-[40px] mb-[80px]">
+    <div className="max-w-[1240px] mx-auto px-[40px] mb-[80px] pt-20">
       <div className="bg-[#C4472A] rounded-[16px] px-10 py-16 lg:px-20 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
         
         {/* LEFT */}
@@ -68,9 +69,9 @@ export const JoinUsBanner = () => {
 
         {/* RIGHT */}
         <div className="shrink-0">
-          <button className="bg-white text-[#C4472A] font-body font-semibold text-[15px] px-[40px] py-[16px] rounded-[50px] hover:bg-white/90 transition-colors">
+          <Link href="/contact_us" className="bg-white text-[#C4472A] font-body font-semibold text-[15px] px-[40px] py-[16px] rounded-[50px] hover:bg-white/90 transition-colors inline-block text-center">
             JOIN NOW →
-          </button>
+          </Link>
         </div>
 
       </div>

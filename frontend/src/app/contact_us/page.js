@@ -29,7 +29,6 @@ export default function ContactUsPage() {
         name: "", 
         email: "", 
         phone: "",
-        subject: "",
         message: "" 
     });
     const [selectedOption, setSelectedOption] = useState("");
@@ -41,7 +40,7 @@ export default function ContactUsPage() {
     };
 
     const handleReset = () => {
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", message: "" });
         setSelectedOption("");
     };
 
@@ -216,19 +215,6 @@ export default function ContactUsPage() {
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label htmlFor="subject" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Subject</label>
-                                        <input 
-                                            type="text" 
-                                            id="subject" 
-                                            value={formData.subject}
-                                            onChange={handleChange}
-                                            placeholder="Subject of your message" 
-                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col">
                                     <label htmlFor="purpose" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Purpose of Contact</label>
                                     <select 
                                         id="purpose"
@@ -242,12 +228,14 @@ export default function ContactUsPage() {
                                         ))}
                                     </select>
                                 </div>
+                                </div>
+
 
                                 <div className="flex flex-col">
                                     <label htmlFor="message" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Your Message</label>
                                     <textarea 
                                         id="message" 
-                                        rows="5"
+                                        rows="4"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required

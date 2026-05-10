@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container } from '../common/Layout';
 // import courierMan from '@/assets/movers_packers.jpg';
 import moving from '@/assets/moving.png';
@@ -44,9 +45,9 @@ export const ReliableSection = () => {
             <p className="font-body text-[15px] text-[#555] leading-[1.85] mb-8">
               At Assure Sift, we understand that moving is more than just transporting items—it&apos;s about transitioning your life. Our team of professionals is dedicated to ensuring a stress-free experience with maximum safety and precision.
             </p>
-            <button className="bg-[#C4472A] text-white font-body font-semibold text-[15px] px-[32px] py-[14px] rounded-[50px] hover:bg-[#A63A22] transition-colors">
+            <Link href="/#services" className="bg-[#C4472A] text-white font-body font-semibold text-[15px] px-[32px] py-[14px] rounded-[50px] hover:bg-[#A63A22] transition-colors inline-block text-center mt-2">
               Book Now →
-            </button>
+            </Link>
           </div>
 
         </div>
