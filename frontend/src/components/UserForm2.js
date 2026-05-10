@@ -294,27 +294,37 @@ const UserForm2 = ({ selectedService, compact = false }) => {
             <div className="space-y-3 mb-3">
                 <div>
                     <label className={labelClass}>Moving From</label>
-                    <input
-                        type="text"
-                        name="pickup_address"
-                        value={formData.pickup_address}
-                        onChange={handleChange}
-                        placeholder="Enter Pickup Location"
-                        className={inputClass}
-                        required
-                    />
+                    <Autocomplete
+                        onLoad={(autocomplete) => (autocompletePickupRef.current = autocomplete)}
+                        onPlaceChanged={() => handleAddressChange('pickup_address', autocompletePickupRef.current.getPlace())}
+                    >
+                        <input
+                            type="text"
+                            name="pickup_address"
+                            value={formData.pickup_address}
+                            onChange={handleChange}
+                            placeholder="Enter Pickup Location"
+                            className={inputClass}
+                            required
+                        />
+                    </Autocomplete>
                 </div>
                 <div>
                     <label className={labelClass}>Moving To</label>
-                    <input
-                        type="text"
-                        name="drop_address"
-                        value={formData.drop_address}
-                        onChange={handleChange}
-                        placeholder="Enter Drop Location"
-                        className={inputClass}
-                        required
-                    />
+                    <Autocomplete
+                        onLoad={(autocomplete) => (autocompleteDropRef.current = autocomplete)}
+                        onPlaceChanged={() => handleAddressChange('drop_address', autocompleteDropRef.current.getPlace())}
+                    >
+                        <input
+                            type="text"
+                            name="drop_address"
+                            value={formData.drop_address}
+                            onChange={handleChange}
+                            placeholder="Enter Drop Location"
+                            className={inputClass}
+                            required
+                        />
+                    </Autocomplete>
                 </div>
             </div>
         );
@@ -482,6 +492,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
     // Compact mode for homepage sidebar
     if (compact) {
         return (
+            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyC5WzOSNJzkMATaZOnBUCV_ryvr4RsNQMY"} libraries={LIBRARIES}>
                 <div className="bg-white rounded-2xl border border-gray-100 card-shadow overflow-hidden h-fit flex flex-col">
                     <div className="px-6 pt-6 pb-4 flex-shrink-0">
                         <h3 className="text-xl font-bold text-navy mb-0.5" style={{ fontFamily: 'var(--font-playfair), serif' }}>
@@ -542,11 +553,13 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                         </div>
                     </form>
                 </div>
+            </LoadScript>
         );
     }
 
     // Full mode (standalone page)
     return (
+        <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyC5WzOSNJzkMATaZOnBUCV_ryvr4RsNQMY"} libraries={LIBRARIES}>
             <div className="w-full flex flex-col items-center py-12">
                 <div className="w-full max-w-5xl px-4 flex flex-wrap justify-center gap-3 mb-10">
                     {options.map((option) => (
@@ -623,6 +636,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                     </div>
                 </div>
             </div>
+        </LoadScript>
     );
 };
 
