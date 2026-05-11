@@ -24,6 +24,8 @@ const getBlog = async (req, res, next) => {
 };
 
 const createBlog = async (req, res, next) => {
+    console.log("blog data is here: ", req.body);
+    console.log("image data is here: ", req.file);
     try {
         if (req.fileValidationError) {
             return errorResponse(res, req.fileValidationError, 400);

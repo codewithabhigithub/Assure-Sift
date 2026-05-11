@@ -4,15 +4,17 @@ const { successResponse, errorResponse } = require('../utils/responseHandler');
 
 const submitContactForm = async (req, res, next) => {
     try {
-        const { name, email, message, purpose } = req.body;
+        console.log("Contact form ", req.body);
 
-        if (!name || !email || !message || !purpose) {
+        const { name, email, phone, message, purpose } = req.body;
+
+        if (!name || !email || !phone || !message || !purpose) {
             return errorResponse(res, 'All fields are required', 400);
         }
 
-        const id = await contactService.saveContactForm({ name, email, message, purpose });
+        const id = await contactService.saveContactForm({ name, email, phone, message, purpose });
 
-        const emailContent = `Name: ${name}\nEmail: ${email}\nPurpose: ${purpose}\nMessage: ${message}`;
+        const emailContent = `Name: ${name}\nEmail: ${email} \nPhone Number: ${phone}\nPurpose: ${purpose}\nMessage: ${message}`;
 
         await Promise.all([
             sendEmail(email, 'Contact Form Submission Received', 'Thank you for reaching out! We will get back to you soon.'),
