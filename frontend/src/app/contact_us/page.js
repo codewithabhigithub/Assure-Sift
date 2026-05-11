@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-    MapPin, 
-    Building2, 
-    Phone, 
-    Clock, 
-    Mail 
+import {
+    MapPin,
+    Building2,
+    Phone,
+    Clock,
+    Mail
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -25,11 +25,11 @@ const CONTACT_OPTIONS = [
 ];
 
 export default function ContactUsPage() {
-    const [formData, setFormData] = useState({ 
-        name: "", 
-        email: "", 
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
         phone: "",
-        message: "" 
+        message: ""
     });
     const [selectedOption, setSelectedOption] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -100,7 +100,7 @@ export default function ContactUsPage() {
                 <Container className="max-w-[1240px]">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
                         {/* Card 1 */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -109,14 +109,14 @@ export default function ContactUsPage() {
                             <MapPin size={32} className="text-[#C4472A] stroke-[1.5]" />
                             <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Head Office</h3>
                             <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
-                                House No. 14, Ganesh Nagar-17,<br/>
-                                Niwaru Road, Jhotwara,<br/>
+                                House No. 14, Ganesh Nagar-17,<br />
+                                Niwaru Road, Jhotwara,<br />
                                 Jaipur, Rajasthan 302012
                             </p>
                         </motion.div>
 
                         {/* Card 2 */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -126,14 +126,14 @@ export default function ContactUsPage() {
                             <Building2 size={32} className="text-[#C4472A] stroke-[1.5]" />
                             <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Branch Office</h3>
                             <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
-                                263/827, Sector-26,<br/>
-                                Opposite Unique Tower,<br/>
-                                Pratap Nagar, Jaipur 302033
+                                106-B, Jagdamba Nagar-B,<br />
+                                Near Heerapura Power House,<br />
+                                Jaipur, Rajasthan 302021
                             </p>
                         </motion.div>
 
                         {/* Card 3 */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -143,8 +143,8 @@ export default function ContactUsPage() {
                             <Phone size={32} className="text-[#C4472A] stroke-[1.5]" />
                             <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mt-[16px]">Call & Email</h3>
                             <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
-                                +91-8619771107<br/>
-                                +91-7014329644<br/>
+                                +91-8619771107<br />
+                                +91-7014329644<br />
                                 info@assuresift.com
                             </p>
                         </motion.div>
@@ -156,9 +156,9 @@ export default function ContactUsPage() {
             <section className="bg-[#F8F6F2] py-[80px]">
                 <Container className="max-w-[1240px]">
                     <div className="grid lg:grid-cols-[58%_38%] gap-[48px] items-start">
-                        
+
                         {/* LEFT — Contact Form Card */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -178,25 +178,25 @@ export default function ContactUsPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
                                     <div className="flex flex-col">
                                         <label htmlFor="name" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Full Name</label>
-                                        <input 
-                                            type="text" 
-                                            id="name" 
+                                        <input
+                                            type="text"
+                                            id="name"
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Your Full Name" 
+                                            placeholder="Your Full Name"
                                             className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
                                         />
                                     </div>
                                     <div className="flex flex-col">
                                         <label htmlFor="email" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Email Address</label>
-                                        <input 
-                                            type="email" 
-                                            id="email" 
+                                        <input
+                                            type="email"
+                                            id="email"
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            placeholder="you@example.com" 
+                                            placeholder="you@example.com"
                                             className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
                                         />
                                     </div>
@@ -205,55 +205,55 @@ export default function ContactUsPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
                                     <div className="flex flex-col">
                                         <label htmlFor="phone" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Phone Number</label>
-                                        <input 
-                                            type="tel" 
-                                            id="phone" 
+                                        <input
+                                            type="tel"
+                                            id="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            placeholder="+91" 
+                                            placeholder="+91"
                                             className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors"
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                    <label htmlFor="purpose" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Purpose of Contact</label>
-                                    <select 
-                                        id="purpose"
-                                        value={selectedOption}
-                                        onChange={(e) => setSelectedOption(e.target.value)}
-                                        className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors cursor-pointer"
-                                    >
-                                        <option value="" disabled>Select a purpose</option>
-                                        {CONTACT_OPTIONS.map(opt => (
-                                            <option key={opt.id} value={opt.label}>{opt.label}</option>
-                                        ))}
-                                    </select>
-                                </div>
+                                        <label htmlFor="purpose" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Purpose of Contact</label>
+                                        <select
+                                            id="purpose"
+                                            value={selectedOption}
+                                            onChange={(e) => setSelectedOption(e.target.value)}
+                                            className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors cursor-pointer"
+                                        >
+                                            <option value="" disabled>Select a purpose</option>
+                                            {CONTACT_OPTIONS.map(opt => (
+                                                <option key={opt.id} value={opt.label}>{opt.label}</option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
 
 
                                 <div className="flex flex-col">
                                     <label htmlFor="message" className="font-body font-semibold text-[11px] uppercase tracking-[0.08em] text-[#999] mb-[6px]">Your Message</label>
-                                    <textarea 
-                                        id="message" 
+                                    <textarea
+                                        id="message"
                                         rows="4"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        placeholder="How can we help you?" 
+                                        placeholder="How can we help you?"
                                         className="w-full bg-transparent border-b-[1.5px] border-[#E8E4DC] py-[12px] px-[4px] font-body text-[15px] text-[#1A1A2E] focus:border-[#C4472A] outline-none rounded-none transition-colors resize-none"
                                     ></textarea>
                                 </div>
 
-                                <button 
-                                    type="submit" 
+                                <button
+                                    type="submit"
                                     disabled={isLoading}
                                     className="w-full bg-[#C4472A] text-white rounded-[50px] py-[16px] font-body font-semibold text-[15px] tracking-[0.04em] hover:bg-[#a83820] transition-colors disabled:opacity-50 mt-[24px]"
                                 >
                                     {isLoading ? "Sending..." : "Send Message →"}
                                 </button>
-                                
-                                <button 
-                                    type="button" 
+
+                                <button
+                                    type="button"
                                     onClick={handleReset}
                                     className="block w-full text-center mt-[12px] font-body text-[13px] text-[#aaa] underline hover:text-[#1A1A2E] transition-colors"
                                 >
@@ -263,7 +263,7 @@ export default function ContactUsPage() {
                         </motion.div>
 
                         {/* RIGHT — Sidebar */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -274,7 +274,7 @@ export default function ContactUsPage() {
                             <div className="bg-[#1A1A2E] rounded-[16px] p-[32px]">
                                 <Clock size={28} className="text-[#C4472A] stroke-[1.5]" />
                                 <h3 className="font-body font-semibold text-[16px] text-white mt-[12px] mb-[16px]">Working Hours</h3>
-                                
+
                                 <div className="flex justify-between items-center py-[12px] border-b border-white/10">
                                     <span className="font-body text-[13px] text-white/65">Monday – Saturday</span>
                                     <span className="font-body text-[13px] text-white/65">9:00 AM – 7:00 PM</span>
@@ -292,14 +292,14 @@ export default function ContactUsPage() {
                             {/* Card 2 — Quick Connect */}
                             <div className="bg-white rounded-[16px] p-[32px] shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
                                 <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mb-[16px]">Quick Connect</h3>
-                                <a 
-                                    href="tel:+918619771107" 
+                                <a
+                                    href="tel:+918619771107"
                                     className="block w-full text-center border-[1.5px] border-[#C4472A] text-[#C4472A] rounded-[50px] py-[12px] font-body font-medium text-[14px] hover:bg-[#C4472A] hover:text-white transition-colors"
                                 >
                                     📞 Call Now
                                 </a>
-                                <a 
-                                    href="mailto:info@assuresift.com" 
+                                <a
+                                    href="mailto:assuresiftrelocation6@gmail.com"
                                     className="block w-full text-center bg-[#1A1A2E] text-white rounded-[50px] py-[12px] font-body font-medium text-[14px] hover:bg-[#2a2a3e] transition-colors mt-[12px]"
                                 >
                                     ✉ Email Us
@@ -319,7 +319,7 @@ export default function ContactUsPage() {
                 <div className="w-full h-[420px] bg-stone/20 overflow-hidden">
                     <iframe
                         title="Location map"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14232.062452296066!2d75.76008620888206!3d26.912440316499833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db45bb6276865%3A0xcb1b51e9b21f3f98!2sJhotwara%2C%20Jaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639948.549745905!2d74.42042456993272!3d27.010022311565482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db500182defaf%3A0x9d6ac136b6d5c014!2sSondiriya%20hair%20saloon!5e0!3m2!1sen!2sin!4v1778515772811!5m2!1sen!2sin"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
@@ -327,6 +327,7 @@ export default function ContactUsPage() {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
+
                 </div>
             </section>
 

@@ -25,7 +25,7 @@ export const ReliableSection = () => {
               
               {/* Overlapping Badge */}
               <div className="absolute bottom-[24px] left-[24px] bg-white/95 backdrop-blur-sm rounded-[12px] px-[20px] py-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
-                <span className="font-body font-semibold text-[13px] text-[#C4472A]">ASSURE SIFT</span>
+                <span className="font-body font-semibold text-[13px] text-[#C4472A]">ASSURE SIFT RELOCATION</span>
               </div>
             </div>
 
@@ -43,7 +43,7 @@ export const ReliableSection = () => {
               Reliable and Efficient Moving Services
             </h2>
             <p className="font-body text-[15px] text-[#555] leading-[1.85] mb-8">
-              At Assure Sift, we understand that moving is more than just transporting items—it&apos;s about transitioning your life. Our team of professionals is dedicated to ensuring a stress-free experience with maximum safety and precision.
+              At Assure Sift Relocation, we understand that moving is more than just transporting items—it&apos;s about transitioning your life. Our team of professionals is dedicated to ensuring a stress-free experience with maximum safety and precision.
             </p>
             <Link href="/#services" className="bg-[#C4472A] text-white font-body font-semibold text-[15px] px-[32px] py-[14px] rounded-[50px] hover:bg-[#A63A22] transition-colors inline-block text-center mt-2">
               Book Now →

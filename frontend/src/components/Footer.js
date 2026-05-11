@@ -12,10 +12,10 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-8">
                         <Link href="/">
-                            <Image className="h-10 w-auto brightness-0 invert" src={logoWhite} alt="Assure Sift Logo" />
+                            <Image className="h-10 w-auto brightness-0 invert" src={logoWhite} alt="Assure Sift Relocation Logo" />
                         </Link>
                         <p className="text-white/60 text-sm leading-loose max-w-xs font-body">
-                            Welcome to Assure Sift, your trusted partner for all your packing and moving needs. We are committed to providing reliable, efficient, and affordable relocation services.
+                            Welcome to Assure Sift Relocation, your trusted partner for all your packing and moving needs. We are committed to providing reliable, efficient, and affordable relocation services.
                         </p>
                         <div className="flex gap-4">
                             {[

@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState, useContext } from 'react';
-import { Lock, User } from 'lucide-react';
+import { Lock, User, ArrowRight } from 'lucide-react';
 import { AuthContext } from '@/context/AuthContext';
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { Container, Section } from "@/components/common/Layout";
-import { Reveal } from "@/components/ui/Reveal";
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -19,69 +17,154 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-bg-primary flex flex-col">
+    <main
+      className="min-h-screen flex flex-col"
+      style={{ backgroundColor: '#F7F3EE', fontFamily: "'Poppins', sans-serif" }}
+    >
       <Navbar />
-      
-      <div className="flex-grow flex items-center justify-center pt-[120px] pb-32 px-6">
-        <Container className="max-w-md w-full">
-          <Reveal width="100%">
-            <div className="bg-white p-12 lg:p-16 rounded-[40px] shadow-hover border border-stone/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              
-              <div className="text-center mb-12">
-                <span className="subtitle">Secure Portal</span>
-                <h2 className="text-4xl lg:text-5xl font-display leading-tight mb-2">Admin Login</h2>
-                <p className="text-text-muted font-body font-light text-sm">Access your strategic dashboard</p>
-              </div>
-              
-              <form className="space-y-8" onSubmit={handleSubmit}>
-                <div className="space-y-6">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1 flex items-center gap-2">
-                      <User size={12} /> Username
-                    </label>
-                    <input
-                      type="text"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      className="w-full bg-stone/5 border-b border-stone/30 px-6 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
-                      placeholder="Principal ID"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted px-1 flex items-center gap-2">
-                      <Lock size={12} /> Password
-                    </label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full bg-stone/5 border-b border-stone/30 px-6 py-4 focus:border-accent outline-none transition-colors font-body text-base rounded-t-2xl"
-                      placeholder="Access Token"
-                      required
-                    />
-                  </div>
-                </div>
 
-                {error && (
-                  <div className="bg-accent/5 border-l-4 border-accent p-4 rounded-r-xl">
-                    <p className="text-xs text-accent font-bold tracking-widest uppercase">{error}</p>
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="w-full btn-primary py-5 text-[11px] tracking-[0.2em] uppercase"
-                >
-                  Initiate Session
-                </button>
-              </form>
-            </div>
-          </Reveal>
-        </Container>
+      {/* Hero-style top band matching site's section headers */}
+      <div
+        className="w-full text-center py-10 pt-30"
+        style={{ backgroundColor: '#F7F3EE', borderBottom: '1px solid #E8E0D6' }}
+      >
+        <span
+          className="inline-block text-xs font-semibold uppercase tracking-widest mb-2 px-4 py-1 rounded-full"
+          style={{ color: '#E8472A', backgroundColor: '#E8472A18', letterSpacing: '0.18em' }}
+        >
+          Secure Portal
+        </span>
+        <h1
+          className="text-4xl md:text-5xl font-bold mt-2"
+          style={{ color: '#1A1A2E', fontFamily: "'Georgia', 'Times New Roman', serif", lineHeight: 1.15 }}
+        >
+          Admin <span style={{ color: '#E8472A' }}>Login</span>
+        </h1>
+        <p className="mt-2 text-sm" style={{ color: '#7A7A8C' }}>
+          Sign in to access your management dashboard
+        </p>
       </div>
-      
+
+      {/* Login Card */}
+      <div className="flex-grow flex items-center justify-center px-4 py-16">
+        <div
+          className="w-full max-w-md bg-white rounded-2xl overflow-hidden"
+          style={{
+            boxShadow: '0 8px 40px 0 rgba(26,26,46,0.10)',
+            border: '1px solid #EDE6DC',
+          }}
+        >
+          {/* Card top accent bar */}
+          <div style={{ height: 5, background: 'linear-gradient(90deg, #E8472A 60%, #f5a485 100%)' }} />
+
+          <div className="px-10 py-10 md:px-12 md:py-12">
+            <form className="space-y-7" onSubmit={handleSubmit}>
+
+              {/* Username */}
+              <div>
+                <label
+                  className="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-widest"
+                  style={{ color: '#7A7A8C' }}
+                >
+                  <User size={13} style={{ color: '#E8472A' }} />
+                  Username
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Enter your username"
+                    required
+                    className="w-full outline-none text-sm transition-all"
+                    style={{
+                      backgroundColor: '#F7F3EE',
+                      border: '1.5px solid #E8E0D6',
+                      borderRadius: 10,
+                      padding: '13px 16px',
+                      color: '#1A1A2E',
+                      fontFamily: "'Poppins', sans-serif",
+                    }}
+                    onFocus={e => (e.target.style.borderColor = '#E8472A')}
+                    onBlur={e => (e.target.style.borderColor = '#E8E0D6')}
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div>
+                <label
+                  className="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-widest"
+                  style={{ color: '#7A7A8C' }}
+                >
+                  <Lock size={13} style={{ color: '#E8472A' }} />
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                  className="w-full outline-none text-sm transition-all"
+                  style={{
+                    backgroundColor: '#F7F3EE',
+                    border: '1.5px solid #E8E0D6',
+                    borderRadius: 10,
+                    padding: '13px 16px',
+                    color: '#1A1A2E',
+                    fontFamily: "'Poppins', sans-serif",
+                  }}
+                  onFocus={e => (e.target.style.borderColor = '#E8472A')}
+                  onBlur={e => (e.target.style.borderColor = '#E8E0D6')}
+                />
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-xs font-semibold"
+                  style={{
+                    backgroundColor: '#FFF0EE',
+                    border: '1px solid #E8472A33',
+                    color: '#E8472A',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: '#E8472A' }} />
+                  {error}
+                </div>
+              )}
+
+              {/* Submit — matches site's red CTA button */}
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 font-semibold text-sm uppercase tracking-widest transition-all duration-200"
+                style={{
+                  backgroundColor: '#E8472A',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 10,
+                  padding: '15px 24px',
+                  cursor: 'pointer',
+                  letterSpacing: '0.12em',
+                  boxShadow: '0 4px 16px 0 rgba(232,71,42,0.25)',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#c93a20')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#E8472A')}
+              >
+                Login <ArrowRight size={15} />
+              </button>
+            </form>
+
+            {/* Subtle trust line */}
+            <p className="text-center text-xs mt-8" style={{ color: '#B0A89A' }}>
+              🔒 Your session is encrypted and secure
+            </p>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </main>
   );

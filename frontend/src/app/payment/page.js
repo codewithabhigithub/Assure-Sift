@@ -38,7 +38,7 @@ const PaymentPage = () => {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY || "rzp_test_Sgc57vVbrYYdpx",
       amount: formData.amount * 100,
       currency: "INR",
-      name: "Assure Sift",
+      name: "Assure Sift Relocation",
       description: "Secure Relocation Payment",
       image: "/favicon.jpeg",
       handler: function (response) {
@@ -92,7 +92,7 @@ const PaymentPage = () => {
                 <span className="text-accent italic font-display">Move</span>
               </h1>
               <p className="text-xl text-text-muted font-body font-light leading-relaxed max-w-xl mb-12">
-                Confirm your booking with Assure Sift by utilizing our encrypted financial gateway. We utilize industry-standard protocols to ensure your transaction is private and protected.
+                Confirm your booking with Assure Sift Relocation by utilizing our encrypted financial gateway. We utilize industry-standard protocols to ensure your transaction is private and protected.
               </p>
               <div className="flex flex-wrap gap-8">
                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-accent bg-accent/5 px-6 py-3 rounded-full border border-accent/10">

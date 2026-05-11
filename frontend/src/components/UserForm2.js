@@ -263,64 +263,48 @@ const UserForm2 = ({ selectedService, compact = false }) => {
     const labelClass = "block text-xs font-semibold text-gray-600 mb-1.5";
 
     const renderFormFields = () => {
-        const commonDateAndTime = (
-            <div className="grid grid-cols-2 gap-3 mb-3">
+        const commonAddressFields = (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label className={labelClass}>Move Type</label>
-                    <select
-                        name="purpose"
-                        value={selectedOption}
-                        onChange={(e) => setSelectedOption(e.target.value)}
-                        className={inputClass}
-                    >
-                        {options.map(opt => <option key={opt.id} value={opt.id}>{opt.label}</option>)}
-                    </select>
-                </div>
-                <div>
-                    <label className={labelClass}>Move Date</label>
-                    <input
-                        type="date"
-                        name="pickup_date"
-                        value={formData.pickup_date}
-                        onChange={handleChange}
-                        className={inputClass}
-                        required
-                    />
-                </div>
-            </div>
-        );
-
-        const commonAddresses = (
-            <div className="space-y-3 mb-3">
-                <div>
-                    <label className={labelClass}>Moving From</label>
+                    <label className={labelClass}>Pickup Address</label>
                     <Autocomplete
                         onLoad={(autocomplete) => (autocompletePickupRef.current = autocomplete)}
-                        onPlaceChanged={() => handleAddressChange('pickup_address', autocompletePickupRef.current.getPlace())}
+                        onPlaceChanged={() =>
+                            handleAddressChange(
+                                'pickup_address',
+                                autocompletePickupRef.current.getPlace()
+                            )
+                        }
                     >
                         <input
                             type="text"
                             name="pickup_address"
                             value={formData.pickup_address}
                             onChange={handleChange}
-                            placeholder="Enter Pickup Location"
+                            placeholder="Enter Pickup Address"
                             className={inputClass}
                             required
                         />
                     </Autocomplete>
                 </div>
+
                 <div>
-                    <label className={labelClass}>Moving To</label>
+                    <label className={labelClass}>Drop Address</label>
                     <Autocomplete
                         onLoad={(autocomplete) => (autocompleteDropRef.current = autocomplete)}
-                        onPlaceChanged={() => handleAddressChange('drop_address', autocompleteDropRef.current.getPlace())}
+                        onPlaceChanged={() =>
+                            handleAddressChange(
+                                'drop_address',
+                                autocompleteDropRef.current.getPlace()
+                            )
+                        }
                     >
                         <input
                             type="text"
                             name="drop_address"
                             value={formData.drop_address}
                             onChange={handleChange}
-                            placeholder="Enter Drop Location"
+                            placeholder="Enter Drop Address"
                             className={inputClass}
                             required
                         />
@@ -330,34 +314,64 @@ const UserForm2 = ({ selectedService, compact = false }) => {
         );
 
         switch (selectedOption) {
+
+            // ================= HOUSEHOLD =================
             case 'household':
                 return (
                     <>
-                        <div className="mb-3">
-                            <label className={labelClass}>Apartment Size</label>
-                            <select
-                                name="apartmentSize"
-                                value={formData.apartmentSize}
-                                onChange={handleChange}
-                                className={inputClass}
-                                required
-                            >
-                                <option value="">Select Apartment Size</option>
-                                {apartmentSizes.map(size => <option key={size.value} value={size.value}>{size.label}</option>)}
-                            </select>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Apartment Size</label>
+                                <select
+                                    name="apartmentSize"
+                                    value={formData.apartmentSize}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select Apartment Size</option>
+                                    {apartmentSizes.map(size => (
+                                        <option key={size.value} value={size.value}>
+                                            {size.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
                         </div>
-                        {commonAddresses}
-                        {commonDateAndTime}
+
+                        {commonAddressFields}
                     </>
                 );
+
+            // ================= OFFICE =================
             case 'office':
-            case 'commercial':
-            case 'truck':
-            case 'last_mile':
-            case 'odc_consignment':
                 return (
                     <>
-                        <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div>
                                 <label className={labelClass}>Company Name</label>
                                 <input
@@ -365,125 +379,577 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                                     name="companyName"
                                     value={formData.companyName}
                                     onChange={handleChange}
-                                    placeholder="Company Name"
+                                    placeholder="Enter Company Name"
                                     className={inputClass}
                                     required
                                 />
                             </div>
-                            {selectedOption === 'commercial' || selectedOption === 'odc_consignment' ? (
-                                <div>
-                                    <label className={labelClass}>Material Type</label>
-                                    <input
-                                        type="text"
-                                        name="materialType"
-                                        value={formData.materialType}
-                                        onChange={handleChange}
-                                        placeholder="Material Type"
-                                        className={inputClass}
-                                        required
-                                    />
-                                </div>
-                            ) : null}
-                            {selectedOption === 'truck' ? (
-                                <div>
-                                    <label className={labelClass}>Truck Type</label>
-                                    <select
-                                        name="truckType"
-                                        value={formData.truckType}
-                                        onChange={handleChange}
-                                        className={inputClass}
-                                        required
-                                    >
-                                        <option value="">Select Truck Type</option>
-                                        {truckType.map(type => <option key={type.value} value={type.value}>{type.label}</option>)}
-                                    </select>
-                                </div>
-                            ) : null}
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
                         </div>
-                        {commonAddresses}
-                        {commonDateAndTime}
+
+                        {commonAddressFields}
                     </>
                 );
+
+            // ================= INTERNATIONAL =================
+            case 'international':
+            case 'fine_arts':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= CAR =================
             case 'car':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Car Model</label>
+                                <input
+                                    type="text"
+                                    name="carModel"
+                                    value={formData.carModel}
+                                    onChange={handleChange}
+                                    placeholder="Enter Car Model"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= BIKE =================
             case 'bike':
                 return (
                     <>
-                        <div className="mb-3">
-                            <label className={labelClass}>{selectedOption === 'car' ? 'Car Model' : 'Bike Model'}</label>
-                            <input
-                                type="text"
-                                name={selectedOption === 'car' ? 'carModel' : 'bikeModel'}
-                                value={selectedOption === 'car' ? formData.carModel : formData.bikeModel}
-                                onChange={handleChange}
-                                placeholder={`Enter ${selectedOption} Model`}
-                                className={inputClass}
-                                required
-                            />
-                        </div>
-                        {commonAddresses}
-                        {commonDateAndTime}
-                    </>
-                );
-            case 'courier':
-                return (
-                    <>
-                        <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div>
-                                <label className={labelClass}>Parcel Weight (g)</label>
+                                <label className={labelClass}>Bike Model</label>
                                 <input
-                                    type="number"
-                                    name="parcel_weight"
-                                    value={formData.parcel_weight}
+                                    type="text"
+                                    name="bikeModel"
+                                    value={formData.bikeModel}
                                     onChange={handleChange}
-                                    placeholder="Weight in grams"
+                                    placeholder="Enter Bike Model"
                                     className={inputClass}
                                     required
                                 />
                             </div>
+
                             <div>
-                                <label className={labelClass}>Measurements (LxWxH)</label>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= SECURE STORAGE =================
+            case 'secure':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Storage Type</label>
+                                <select
+                                    name="storageType"
+                                    value={formData.storageType}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select Storage Type</option>
+
+                                    {storageTypes.map(type => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= COMMERCIAL =================
+            case 'commercial':
+            case 'odc_consignment':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Company Name</label>
+                                <input
+                                    type="text"
+                                    name="companyName"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
+                                    placeholder="Enter Company Name"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Material Type</label>
+                                <input
+                                    type="text"
+                                    name="materialType"
+                                    value={formData.materialType}
+                                    onChange={handleChange}
+                                    placeholder="Enter Material Type"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= COURIER =================
+            case 'courier':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Parcel Weight</label>
+                                <input
+                                    type="text"
+                                    name="parcel_weight"
+                                    value={formData.parcel_weight}
+                                    onChange={handleChange}
+                                    placeholder="Enter Weight"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Measurements</label>
                                 <input
                                     type="text"
                                     name="measurement"
                                     value={formData.measurement}
                                     onChange={handleChange}
-                                    placeholder="e.g., 10x20x30"
+                                    placeholder="10x20x30"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Shipment Value</label>
+                                <input
+                                    type="text"
+                                    name="shipment_value"
+                                    value={formData.shipment_value}
+                                    onChange={handleChange}
+                                    placeholder="Enter Shipment Value"
                                     className={inputClass}
                                     required
                                 />
                             </div>
                         </div>
-                        <div className="mb-3 relative">
-                            <label className={labelClass}>Select Content</label>
-                            <input
-                                type="text"
-                                name="content"
-                                value={formData.content}
-                                onChange={handleChange}
-                                onFocus={handleInputFocus}
-                                onBlur={handleInputBlur}
-                                placeholder="Search or select content"
-                                className={inputClass}
-                            />
-                            {isDropdownOpen && (
-                                <ul className="absolute z-10 mt-1 w-full bg-white border rounded-xl shadow-xl max-h-48 overflow-y-auto">
-                                    {filteredOptions.map(option => (
-                                        <li key={option.value} onClick={() => handleSelectOption(option)} className="p-2.5 hover:bg-cream text-sm cursor-pointer border-b border-gray-50 last:border-0">
-                                            {option.label}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div className="relative">
+                                <label className={labelClass}>Content</label>
+
+                                <input
+                                    type="text"
+                                    name="content"
+                                    value={formData.content}
+                                    onChange={handleChange}
+                                    onFocus={handleInputFocus}
+                                    onBlur={handleInputBlur}
+                                    placeholder="Search Content"
+                                    className={inputClass}
+                                />
+
+                                {isDropdownOpen && (
+                                    <ul className="absolute z-10 mt-1 w-full bg-white border rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                                        {filteredOptions.map(option => (
+                                            <li
+                                                key={option.value}
+                                                onClick={() => handleSelectOption(option)}
+                                                className="p-2 hover:bg-gray-100 cursor-pointer"
+                                            >
+                                                {option.label}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
                         </div>
-                        {commonAddresses}
-                        {commonDateAndTime}
+
+                        {commonAddressFields}
                     </>
                 );
+
+            // ================= TRUCK =================
+            case 'truck':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+
+                            <div>
+                                <label className={labelClass}>Company Name</label>
+                                <input
+                                    type="text"
+                                    name="companyName"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
+                                    placeholder="Enter Company Name"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Truck Type</label>
+                                <select
+                                    name="truckType"
+                                    value={formData.truckType}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select Truck Type</option>
+
+                                    {truckType.map(type => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= LAST MILE =================
+            case 'last_mile':
+                return (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+
+                            <div>
+                                <label className={labelClass}>Company Name</label>
+                                <input
+                                    type="text"
+                                    name="companyName"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
+                                    placeholder="Enter Company Name"
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Material Type</label>
+                                <select
+                                    name="last_mile_material_type"
+                                    value={formData.last_mile_material_type}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select Material Type</option>
+
+                                    {last_mile_material_type.map(type => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Vehicle Type</label>
+                                <select
+                                    name="vehicleType"
+                                    value={formData.vehicleType}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select Vehicle Type</option>
+
+                                    {vehicleTypes.map(type => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
+                    </>
+                );
+
+            // ================= DEFAULT =================
             default:
                 return (
                     <>
-                        {commonAddresses}
-                        {commonDateAndTime}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label className={labelClass}>Pickup Date</label>
+                                <input
+                                    type="date"
+                                    name="pickup_date"
+                                    value={formData.pickup_date}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                />
+                            </div>
+
+                            <div>
+                                <label className={labelClass}>Pickup Time</label>
+                                <input
+                                    type="time"
+                                    name="pickup_time"
+                                    value={formData.pickup_time}
+                                    onChange={handleChange}
+                                    className={inputClass}
+                                />
+                            </div>
+                        </div>
+
+                        {commonAddressFields}
                     </>
                 );
         }
@@ -511,7 +977,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                             </div>
                             {/* Email */}
                             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className={inputClass} required />
-                            
+
                             {/* Dynamic fields */}
                             {renderFormFields()}
                         </div>
@@ -533,9 +999,8 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                             <div className="flex gap-3">
                                 <button
                                     type="submit"
-                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 transition-all duration-300 ease-in-out ${
-                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22] shadow-sm'
-                                    }`}
+                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 transition-all duration-300 ease-in-out ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22] shadow-sm'
+                                        }`}
                                     disabled={isLoading}
                                 >
                                     {isLoading ? 'Processing...' : 'Submit'}
@@ -566,11 +1031,10 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                         <button
                             key={option.id}
                             onClick={() => handleOptionClick(option.id)}
-                            className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-300 ease-in-out w-28 h-28 ${
-                                selectedOption === option.id 
-                                ? 'bg-[#C4472A]/10 border-[#C4472A] scale-105 card-shadow' 
-                                : 'bg-white border-gray-100 hover:border-[#C4472A]/30 hover:scale-105'
-                            }`}
+                            className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-300 ease-in-out w-28 h-28 ${selectedOption === option.id
+                                    ? 'bg-[#C4472A]/10 border-[#C4472A] scale-105 card-shadow'
+                                    : 'bg-white border-gray-100 hover:border-[#C4472A]/30 hover:scale-105'
+                                }`}
                         >
                             <span className="text-3xl mb-2">{option.icon}</span>
                             <span className={`text-[10px] font-bold uppercase tracking-tighter ${selectedOption === option.id ? 'text-[#C4472A]' : 'text-gray-500'}`}>
@@ -616,9 +1080,8 @@ const UserForm2 = ({ selectedService, compact = false }) => {
                             <div className="flex gap-3">
                                 <button
                                     type="submit"
-                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white transition-all duration-300 ease-in-out ${
-                                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22]'
-                                    }`}
+                                    className={`flex-1 py-3.5 rounded-xl font-bold text-white transition-all duration-300 ease-in-out ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#C4472A] hover:bg-[#A63A22]'
+                                        }`}
                                     disabled={isLoading}
                                 >
                                     {isLoading ? 'Processing...' : 'Request Instant Quote'}

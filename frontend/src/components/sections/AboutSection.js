@@ -45,7 +45,7 @@ export const AboutSection = () => {
             
             <div className="space-y-4 font-body text-[15px] text-[#555] leading-[1.85] mb-8">
               <p>
-                Assure Sift has been a pioneer in the relocation industry for over 15 years, setting benchmarks in safety, efficiency, and customer satisfaction.
+                Assure Sift Relocation has been a pioneer in the relocation industry for over 15 years, setting benchmarks in safety, efficiency, and customer satisfaction.
               </p>
               <p>
                 We provide a comprehensive suite of relocation services, from household shifting to complex industrial moves, all handled with professional expertise and care.

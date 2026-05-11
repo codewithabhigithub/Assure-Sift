@@ -38,7 +38,7 @@ export const Hero = () => {
             transition={{ delay: 0.2 }}
             className="font-body text-base md:text-lg text-[#555] leading-relaxed max-w-lg mb-10"
           >
-            From Packing to Unpacking, We&apos;ve Got You Covered. Discover Assure Sift Today.
+            From Packing to Unpacking, We&apos;ve Got You Covered. Discover Assure Sift Relocation Today.
           </motion.p>
           
           <motion.div 

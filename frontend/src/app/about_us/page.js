@@ -80,7 +80,7 @@ export default function AboutUsPage() {
               India&apos;s Most Trusted Relocation Partner
             </h1>
             <p className="font-body text-[16px] text-[#777] max-w-[560px] mx-auto mt-3 leading-relaxed">
-              Built on trust, driven by excellence — Assure Sift has been redefining the moving experience across India since inception.
+              Built on trust, driven by excellence — Assure Sift Relocation has been redefining the moving experience across India since inception.
             </p>
             <nav className="font-body text-[13px] text-[#aaa] mt-6 flex justify-center gap-2">
               <Link href="/" className="hover:text-[#C4472A] transition-colors">Home</Link>
@@ -104,7 +104,7 @@ export default function AboutUsPage() {
               className="relative"
             >
               <div className="relative w-full h-[480px] rounded-[16px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.10)]">
-                <Image src={about} alt="Assure Sift Team" fill className="object-cover" />
+                <Image src={about} alt="Assure Sift Relocation Team" fill className="object-cover" />
                 {/* Floating badge */}
                 <div className="absolute bottom-[24px] left-[24px] bg-white rounded-[12px] px-[20px] py-[14px] shadow-lg">
                   <span className="font-body font-semibold text-[13px] text-[#C4472A] flex items-center gap-2">
@@ -131,7 +131,7 @@ export default function AboutUsPage() {
               </h2>
               <div className="mt-6 space-y-4 font-body text-[15px] text-[#555] leading-[1.85]">
                 <p>
-                  Welcome to Assure Sift, your trusted partner for all your packing and moving needs. With years of experience in the industry, we have established ourselves as a reliable and customer-focused moving company dedicated to providing top-notch services to our clients.
+                  Welcome to Assure Sift Relocation, your trusted partner for all your packing and moving needs. With years of experience in the industry, we have established ourselves as a reliable and customer-focused moving company dedicated to providing top-notch services to our clients.
                 </p>
                 <p>
                   We specialize in providing a wide range of packing and moving solutions tailored to meet the unique needs of our customers. Our customer-centric approach and professional team ensure a smooth and stress-free relocation experience.
@@ -188,7 +188,7 @@ export default function AboutUsPage() {
               <span className="block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A] mt-[24px]">OUR MISSION</span>
               <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px]">Redefining the Moving Experience</h3>
               <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px]">
-                At Assure Sift, our mission is to redefine the moving experience by delivering exceptional service that exceeds our customers&apos; expectations. We strive to alleviate the stress and hassle often associated with relocation by offering efficient, affordable, and personalized solutions tailored to meet the unique needs of each client. Our commitment to reliability, professionalism, and customer satisfaction drives everything we do.
+                At Assure Sift Relocation, our mission is to redefine the moving experience by delivering exceptional service that exceeds our customers&apos; expectations. We strive to alleviate the stress and hassle often associated with relocation by offering efficient, affordable, and personalized solutions tailored to meet the unique needs of each client. Our commitment to reliability, professionalism, and customer satisfaction drives everything we do.
               </p>
             </motion.div>
 
@@ -204,7 +204,7 @@ export default function AboutUsPage() {
               <span className="block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#1A1A2E]">OUR VISION</span>
               <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px]">Setting the Industry Standard</h3>
               <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px]">
-                Our vision at Assure Sift is to become the leading provider of packing and moving services, known for our integrity, quality, and innovation. We aim to set the industry standard for excellence by continuously improving our processes, investing in our team members, and embracing technology to enhance the customer experience. We envision a future where every relocation is a seamless and stress-free experience, thanks to the trusted services of Assure Sift.
+                Our vision at Assure Sift Relocation is to become the leading provider of packing and moving services, known for our integrity, quality, and innovation. We aim to set the industry standard for excellence by continuously improving our processes, investing in our team members, and embracing technology to enhance the customer experience. We envision a future where every relocation is a seamless and stress-free experience, thanks to the trusted services of Assure Sift Relocation.
               </p>
             </motion.div>
           </div>
@@ -216,7 +216,7 @@ export default function AboutUsPage() {
         <Container>
           <div className="text-center mb-10">
             <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">BY THE NUMBERS</span>
-            <h2 className="font-display font-bold text-[44px] text-white mt-4">Assure Sift at a Glance</h2>
+            <h2 className="font-display font-bold text-[44px] text-white mt-4">Assure Sift Relocation at a Glance</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12">
@@ -318,10 +318,10 @@ export default function AboutUsPage() {
         <Container className="text-center">
           <h2 className="font-display font-bold text-[48px] text-white">Ready to Make Your Move?</h2>
           <p className="font-body text-[16px] text-white/80 mt-3 max-w-[500px] mx-auto">
-            Get a free quote today and experience the Assure Sift difference.
+            Get a free quote today and experience the Assure Sift Relocation difference.
           </p>
           <div className="mt-[36px] flex flex-wrap justify-center gap-[16px]">
-            <Link href="/#contact" className="bg-white text-[#C4472A] font-body font-semibold text-[15px] px-[40px] py-[16px] rounded-[50px] hover:bg-white/90 transition-all">
+            <Link href="/#services" className="bg-white text-[#C4472A] font-body font-semibold text-[15px] px-[40px] py-[16px] rounded-[50px] hover:bg-white/90 transition-all">
               Get Free Quote →
             </Link>
             <Link href="/contact_us" className="bg-transparent border-[2px] border-white text-white font-body font-semibold text-[15px] px-[40px] py-[16px] rounded-[50px] hover:bg-white hover:text-[#C4472A] transition-all">

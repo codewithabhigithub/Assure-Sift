@@ -40,60 +40,289 @@ const BlogPage = () => {
     );
 
     return (
-        <main className="min-h-screen bg-bg-primary">
+        <main style={{ minHeight: '100vh', backgroundColor: '#F5F0EB' }}>
             <Navbar />
-            
-            {/* Editorial Header */}
-            <section className="bg-bg-dark pt-[200px] pb-[120px] text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/10 blur-[160px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                <Container className="relative z-10 text-center">
+
+            {/* ── Hero Section — matches dark navy hero from homepage ── */}
+            <section style={{
+                backgroundColor: '#1A1E2E',
+                paddingTop: '160px',
+                paddingBottom: '100px',
+                position: 'relative',
+                overflow: 'hidden',
+                textAlign: 'center',
+            }}>
+                {/* Glowing orb accent — same as homepage hero */}
+                <div style={{
+                    position: 'absolute',
+                    top: '-200px',
+                    right: '-200px',
+                    width: '700px',
+                    height: '700px',
+                    background: 'radial-gradient(circle, rgba(220,75,56,0.12) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none',
+                }} />
+                <div style={{
+                    position: 'absolute',
+                    bottom: '-100px',
+                    left: '-100px',
+                    width: '400px',
+                    height: '400px',
+                    background: 'radial-gradient(circle, rgba(220,75,56,0.07) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none',
+                }} />
+
+                <Container>
                     <Reveal>
-                        <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-6 block">Editorial</span>
-                        <h1 className="text-6xl lg:text-[88px] font-display leading-[1.05] mb-8">
-                            Relocation <span className="text-accent italic font-display">Insights</span>
+                        {/* Small label — matches "OUR SERVICES", "WHY CHOOSE ASSURE SFT?" etc. */}
+                        <span style={{
+                            display: 'block',
+                            color: '#DC4B38',
+                            fontSize: '10px',
+                            fontWeight: 700,
+                            letterSpacing: '0.4em',
+                            textTransform: 'uppercase',
+                            marginBottom: '20px',
+                        }}>
+                            Editorial
+                        </span>
+
+                        {/* Large display headline — same size/weight as homepage h1 */}
+                        <h1 style={{
+                            color: '#FFFFFF',
+                            fontSize: 'clamp(48px, 8vw, 84px)',
+                            fontFamily: 'var(--font-display, Georgia, serif)',
+                            fontWeight: 700,
+                            lineHeight: 1.05,
+                            marginBottom: '24px',
+                        }}>
+                            Relocation{' '}
+                            <span style={{
+                                color: '#DC4B38',
+                                fontStyle: 'italic',
+                            }}>
+                                Insights
+                            </span>
                         </h1>
-                        <p className="text-white/40 text-lg font-body font-light max-w-2xl mx-auto leading-relaxed">
+
+                        <p style={{
+                            color: 'rgba(255,255,255,0.45)',
+                            fontSize: '17px',
+                            fontWeight: 300,
+                            lineHeight: 1.7,
+                            maxWidth: '560px',
+                            margin: '0 auto',
+                        }}>
                             Stay updated with the latest tips, guides, and news from the world of professional moving and logistics.
                         </p>
                     </Reveal>
                 </Container>
             </section>
 
-            <Section className="pb-32">
+            {/* ── Blog Grid Section ── */}
+            <Section style={{ paddingTop: '80px', paddingBottom: '120px' }}>
                 <Container>
-                    {/* Refined Search Bar */}
-                    <div className="max-w-2xl mx-auto mb-24 relative reveal">
-                        <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-text-muted" size={20} />
+
+                    {/* Search Bar — pill shape matching homepage track input */}
+                    <div style={{
+                        maxWidth: '600px',
+                        margin: '0 auto 80px auto',
+                        position: 'relative',
+                    }}>
+                        <Search style={{
+                            position: 'absolute',
+                            left: '24px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            color: '#A09890',
+                            width: '18px',
+                            height: '18px',
+                        }} />
                         <input
                             type="text"
                             placeholder="Search articles by title..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-16 pr-8 py-6 bg-white border border-stone/30 rounded-full shadow-soft focus:shadow-hover outline-none transition-all-custom font-body text-lg"
+                            style={{
+                                width: '100%',
+                                paddingLeft: '56px',
+                                paddingRight: '24px',
+                                paddingTop: '20px',
+                                paddingBottom: '20px',
+                                backgroundColor: '#FFFFFF',
+                                border: '1.5px solid rgba(180,170,160,0.35)',
+                                borderRadius: '100px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                                outline: 'none',
+                                fontSize: '15px',
+                                fontWeight: 400,
+                                color: '#2D2926',
+                                transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
+                                boxSizing: 'border-box',
+                            }}
+                            onFocus={e => {
+                                e.target.style.boxShadow = '0 6px 28px rgba(220,75,56,0.12)';
+                                e.target.style.borderColor = 'rgba(220,75,56,0.4)';
+                            }}
+                            onBlur={e => {
+                                e.target.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)';
+                                e.target.style.borderColor = 'rgba(180,170,160,0.35)';
+                            }}
                         />
                     </div>
 
-                    {isLoading ? (
-                        <div className="py-32 flex flex-col items-center justify-center gap-6">
-                            <Activity className="animate-spin text-accent" size={48} />
-                            <p className="text-text-muted font-bold tracking-[0.2em] uppercase text-xs">Accessing Archives...</p>
+                    {/* Section Label — matches "OUR SERVICES", "TESTIMONIALS" labels */}
+                    {!isLoading && filteredBlogs.length > 0 && (
+                        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                            <span style={{
+                                display: 'inline-block',
+                                color: '#DC4B38',
+                                fontSize: '10px',
+                                fontWeight: 700,
+                                letterSpacing: '0.4em',
+                                textTransform: 'uppercase',
+                            }}>
+                                Our Articles
+                            </span>
+                            <h2 style={{
+                                color: '#2D2926',
+                                fontSize: 'clamp(28px, 4vw, 42px)',
+                                fontFamily: 'var(--font-display, Georgia, serif)',
+                                fontWeight: 700,
+                                marginTop: '12px',
+                                lineHeight: 1.2,
+                            }}>
+                                Latest from the Blog
+                            </h2>
                         </div>
+                    )}
+
+                    {/* Loading state */}
+                    {isLoading ? (
+                        <div style={{
+                            paddingTop: '100px',
+                            paddingBottom: '100px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '20px',
+                        }}>
+                            <Activity style={{ color: '#DC4B38', animation: 'spin 1s linear infinite', width: '40px', height: '40px' }} />
+                            <p style={{
+                                color: '#A09890',
+                                fontSize: '10px',
+                                fontWeight: 700,
+                                letterSpacing: '0.25em',
+                                textTransform: 'uppercase',
+                            }}>
+                                Accessing Archives...
+                            </p>
+                            <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+                        </div>
+
                     ) : filteredBlogs.length > 0 ? (
                         <StaggerContainer>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            {/* Card Grid — 3 columns matching "Our Premium Services" grid */}
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                                gap: '28px',
+                            }}>
                                 {filteredBlogs.slice(0, visibleBlogs).map((blog) => (
                                     <StaggerItem key={blog.id}>
-                                        <div className="bg-white rounded-[40px] shadow-soft border border-stone/10 overflow-hidden hover:shadow-hover transition-premium flex flex-col h-full group">
-                                            <div className="p-12 flex-grow space-y-6">
-                                                <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                                                    <span className="flex items-center gap-2"><Calendar size={14} /> {new Date(blog.created_at).toLocaleDateString()}</span>
-                                                    <span className="flex items-center gap-2"><User size={14} /> {blog.author_name}</span>
+                                        <article style={{
+                                            backgroundColor: '#FFFFFF',
+                                            borderRadius: '20px',
+                                            border: '1px solid rgba(180,170,160,0.2)',
+                                            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                                            overflow: 'hidden',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            height: '100%',
+                                            transition: 'box-shadow 0.35s ease, transform 0.35s ease',
+                                            cursor: 'default',
+                                        }}
+                                            onMouseEnter={e => {
+                                                e.currentTarget.style.boxShadow = '0 12px 48px rgba(0,0,0,0.13)';
+                                                e.currentTarget.style.transform = 'translateY(-4px)';
+                                            }}
+                                            onMouseLeave={e => {
+                                                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.06)';
+                                                e.currentTarget.style.transform = 'translateY(0)';
+                                            }}
+                                        >
+                                            {/* Card body */}
+                                            <div style={{ padding: '36px 36px 24px', flexGrow: 1 }}>
+
+                                                {/* Meta row — Date & Author */}
+                                                <div style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '20px',
+                                                    marginBottom: '18px',
+                                                }}>
+                                                    <span style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        color: '#DC4B38',
+                                                        fontSize: '10px',
+                                                        fontWeight: 700,
+                                                        letterSpacing: '0.15em',
+                                                        textTransform: 'uppercase',
+                                                    }}>
+                                                        <Calendar size={12} />
+                                                        {new Date(blog.created_at).toLocaleDateString('en-IN', {
+                                                            day: 'numeric', month: 'short', year: 'numeric',
+                                                        })}
+                                                    </span>
+                                                    <span style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        color: '#A09890',
+                                                        fontSize: '10px',
+                                                        fontWeight: 700,
+                                                        letterSpacing: '0.15em',
+                                                        textTransform: 'uppercase',
+                                                    }}>
+                                                        <User size={12} />
+                                                        {blog.author_name}
+                                                    </span>
                                                 </div>
-                                                <h2 className="text-3xl font-display text-text-dark leading-tight group-hover:text-accent transition-colors duration-500 line-clamp-2">
+
+                                                {/* Title */}
+                                                <h2 style={{
+                                                    color: '#2D2926',
+                                                    fontSize: '22px',
+                                                    fontFamily: 'var(--font-display, Georgia, serif)',
+                                                    fontWeight: 700,
+                                                    lineHeight: 1.35,
+                                                    marginBottom: '14px',
+                                                    display: '-webkit-box',
+                                                    WebkitLineClamp: 2,
+                                                    WebkitBoxOrient: 'vertical',
+                                                    overflow: 'hidden',
+                                                    transition: 'color 0.3s',
+                                                }}>
                                                     {blog.title}
                                                 </h2>
+
+                                                {/* Excerpt */}
                                                 <div
-                                                    className="text-text-muted font-body font-light line-clamp-3 text-base leading-relaxed"
+                                                    style={{
+                                                        color: '#7A706A',
+                                                        fontSize: '14px',
+                                                        fontWeight: 300,
+                                                        lineHeight: 1.75,
+                                                        display: '-webkit-box',
+                                                        WebkitLineClamp: 3,
+                                                        WebkitBoxOrient: 'vertical',
+                                                        overflow: 'hidden',
+                                                    }}
                                                     dangerouslySetInnerHTML={{
                                                         __html: blog.content.length <= 150
                                                             ? blog.content
@@ -101,30 +330,96 @@ const BlogPage = () => {
                                                     }}
                                                 />
                                             </div>
-                                            <div className="px-12 pb-12">
+
+                                            {/* Divider */}
+                                            <div style={{
+                                                height: '1px',
+                                                backgroundColor: 'rgba(180,170,160,0.18)',
+                                                margin: '0 36px',
+                                            }} />
+
+                                            {/* CTA row — matches homepage "Read More" link style */}
+                                            <div style={{ padding: '20px 36px 28px' }}>
                                                 <Link
                                                     href={`/blog/${blog.id}`}
-                                                    className="inline-flex items-center gap-3 text-accent font-bold uppercase tracking-[0.2em] text-[10px] hover:gap-6 transition-all"
+                                                    style={{
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px',
+                                                        color: '#DC4B38',
+                                                        fontSize: '11px',
+                                                        fontWeight: 700,
+                                                        letterSpacing: '0.2em',
+                                                        textTransform: 'uppercase',
+                                                        textDecoration: 'none',
+                                                        transition: 'gap 0.3s ease',
+                                                    }}
+                                                    onMouseEnter={e => e.currentTarget.style.gap = '14px'}
+                                                    onMouseLeave={e => e.currentTarget.style.gap = '8px'}
                                                 >
-                                                    Read Full Article <ChevronRight size={14} />
+                                                    Read Full Article <ChevronRight size={13} />
                                                 </Link>
                                             </div>
-                                        </div>
+                                        </article>
                                     </StaggerItem>
                                 ))}
                             </div>
                         </StaggerContainer>
+
                     ) : (
-                        <div className="py-32 text-center reveal">
-                            <p className="text-2xl text-text-muted font-display italic">No articles found matching your search.</p>
+                        /* Empty state */
+                        <div style={{
+                            paddingTop: '100px',
+                            paddingBottom: '100px',
+                            textAlign: 'center',
+                        }}>
+                            <p style={{
+                                color: '#A09890',
+                                fontSize: '24px',
+                                fontFamily: 'var(--font-display, Georgia, serif)',
+                                fontStyle: 'italic',
+                            }}>
+                                No articles found matching your search.
+                            </p>
                         </div>
                     )}
 
+                    {/* Load More — matches homepage "Book Now" / primary button */}
                     {visibleBlogs < filteredBlogs.length && (
-                        <div className="flex justify-center mt-24 reveal">
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: '72px',
+                        }}>
                             <button
                                 onClick={loadMoreBlogs}
-                                className="btn-primary py-6 px-12"
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    backgroundColor: '#DC4B38',
+                                    color: '#FFFFFF',
+                                    fontSize: '12px',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.2em',
+                                    textTransform: 'uppercase',
+                                    border: 'none',
+                                    borderRadius: '100px',
+                                    padding: '20px 48px',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 8px 30px rgba(220,75,56,0.3)',
+                                    transition: 'background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease',
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.backgroundColor = '#C23E2C';
+                                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(220,75,56,0.4)';
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.backgroundColor = '#DC4B38';
+                                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(220,75,56,0.3)';
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                }}
                             >
                                 Load More Articles
                             </button>
@@ -132,7 +427,7 @@ const BlogPage = () => {
                     )}
                 </Container>
             </Section>
-            
+
             <Footer />
         </main>
     );

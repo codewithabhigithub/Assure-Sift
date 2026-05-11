@@ -58,7 +58,7 @@ export const WhyChoose = () => {
     <section className="bg-white py-24">
       <div className="max-container">
         <div className="mb-12">
-          <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">WHY CHOOSE ASSURE SIFT?</span>
+          <span className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A]">WHY CHOOSE ASSURE SIFT RELOCATION?</span>
         </div>
 
         {/* STATS GRID */}

@@ -47,7 +47,7 @@ export default function Navbar() {
               <Image 
                 className="w-auto h-12 transition-all duration-500" 
                 src={logo} 
-                alt="Assure Sift Logo" 
+                alt="Assure Sift Relocation Logo" 
                 priority
               />
             </Link>
