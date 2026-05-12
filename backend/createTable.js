@@ -1,19 +1,30 @@
+require('dotenv').config();
 const { Pool, Client } = require("pg");
 
 // ====== CONFIG ======
 const DB_NAME = "assuresiftrelocation";
 
 const dbConfig = {
-    user: "postgres",
-    host: "localhost",
-    password: "Abhi@123",
-    port: 5432,
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('sslmode=require') 
+        ? { rejectUnauthorized: false } 
+        : (process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false)
 };
 
 // ====== STEP 1: CREATE DATABASE IF NOT EXISTS ======
 const createDatabaseIfNotExists = async () => {
+    // For remote databases like Prisma, we skip creating the database 
+    // as the database is usually already created and specified in the URL.
+    if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes('localhost')) {
+        console.log("Remote database detected. Skipping database creation step.");
+        return;
+    }
+
     const client = new Client({
-        ...dbConfig,
+        user: "postgres",
+        host: "localhost",
+        password: "Abhi@123",
+        port: 5432,
         database: "postgres", // connect to default DB
     });
 
@@ -40,10 +51,7 @@ const createDatabaseIfNotExists = async () => {
 };
 
 // ====== STEP 2: CONNECT TO YOUR DATABASE ======
-const pool = new Pool({
-    ...dbConfig,
-    database: DB_NAME,
-});
+const pool = new Pool(dbConfig);
 
 // ====== STEP 3: CREATE TABLES ======
 const createTablesIfNotExists = async () => {
