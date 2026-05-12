@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
-export const UPLOAD_BASE = API_BASE.replace('/api', '/uploads');
+const VITE_API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.VITE_API_URL || 'http://localhost:4000';
+const API_BASE = `${VITE_API_URL}/api`;
+export const UPLOAD_BASE = `${VITE_API_URL}/uploads`;
 
 const api = axios.create({
     baseURL: API_BASE,
