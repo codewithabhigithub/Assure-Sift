@@ -4,13 +4,31 @@ const cors = require('cors');
 const path = require('path');
 const { createTablesIfNotExists, createDatabaseIfNotExists } = require('./createTable');
 const errorHandler = require('./src/middlewares/errorHandler');
-const routes = require('./src/routes');
+
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+    'https://assure-sift.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
 // Static uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -33,7 +51,10 @@ app.get('/', (req, res) => {
 });
 
 // Modular Routes
-app.use('/api', routes);
+app.use('/api/contact', require('./src/routes/contactRoutes'));
+app.use('/api/blogs', require('./src/routes/blogRoutes'));
+app.use('/api/admin', require('./src/routes/adminRoutes'));
+app.use('/api/users', require('./src/routes/userRoutes'));
 
 // Error handling middleware
 app.use(errorHandler);
