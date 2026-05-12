@@ -7,26 +7,53 @@ import { Footer } from "@/components/sections/Footer";
 import { Container } from "@/components/common/Layout";
 import { Reveal } from "@/components/ui/Reveal";
 
+// ─── Helper to safely resolve image src from static import or string ──────────
+const imgSrc = (mod) => {
+  if (!mod) return '';
+  if (typeof mod === 'string') return mod;
+  if (mod.src) return mod.src;
+  if (mod.default) return typeof mod.default === 'string' ? mod.default : mod.default?.src ?? '';
+  return '';
+};
+
+// ─── Import images (works with Next.js static imports) ───────────────────────
+import package1 from '@/assets/package_1.jpeg';
+import package2 from '@/assets/package_2.jpeg';
+import package3 from '@/assets/package_3.jpeg';
+import storage1 from '@/assets/storage_1.jpeg';
+import storage2 from '@/assets/storage_2.jpeg';
+import storage3 from '@/assets/storage_3.jpeg';
+import storage4 from '@/assets/storage_4.jpeg';
+import office1 from '@/assets/office_1.jpeg';
+import team1 from '@/assets/team_1.jpeg';
+import team2 from '@/assets/team_2.jpeg';
+import transportation1 from '@/assets/transportation_1.jpeg';
+import transportation2 from '@/assets/transportation_2.jpeg';
+import home2 from '@/assets/home_2.jpeg';
+import home3 from '@/assets/home_3.jpeg';
+
 // ─── Sample gallery data ───────────────────────────────────────────────────────
-// Replace with your API call: const data = await api.get('/gallery');
 const SAMPLE_IMAGES = [
-  { id: 1,  src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800', category: 'Packing',       title: 'Careful Packing',         span: 'tall'  },
-  { id: 2,  src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800', category: 'Home Moving', title: 'Home Relocation',         span: 'wide'  },
-  { id: 3,  src: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800', category: 'Office',      title: 'Office Shifting',         span: 'normal'},
-  { id: 4,  src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800', category: 'Storage',     title: 'Safe Storage Facility',   span: 'normal'},
-  { id: 5,  src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800', category: 'Team',        title: 'Our Expert Team',         span: 'tall'  },
-  { id: 6,  src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800', category: 'Home Moving', title: 'Living Room Setup',        span: 'wide'  },
-  { id: 7,  src: 'https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800', category: 'Transport',   title: 'Fleet on the Road',       span: 'normal'},
-  { id: 8,  src: 'https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?w=800', category: 'Packing',     title: 'Fragile Item Wrapping',   span: 'normal'},
-  { id: 9,  src: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800', category: 'Office',      title: 'Corporate Relocation',    span: 'tall'  },
-  { id: 10, src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800', category: 'Transport',   title: 'Long Distance Move',      span: 'wide'  },
-  { id: 11, src: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800', category: 'Storage',     title: 'Climate Controlled Units', span: 'normal'},
-  { id: 12, src: 'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=800', category: 'Home Moving', title: 'Bedroom Relocation',      span: 'normal'},
+  { id: 1,  src: imgSrc(package1),      category: 'Packing',    title: 'Careful Packing',          span: 'tall'   },
+  { id: 2,  src: imgSrc(office1),       category: 'Office',     title: 'Office Shifting',           span: 'normal' },
+  { id: 3,  src: imgSrc(storage1),      category: 'Storage',    title: 'Safe Storage Facility',     span: 'normal' },
+  { id: 4,  src: imgSrc(team1),         category: 'Team',       title: 'Our Expert Team',           span: 'tall'   },
+  { id: 5,  src: imgSrc(home2),         category: 'Home Moving',title: 'Living Room Setup',         span: 'wide'   },
+  { id: 6,  src: imgSrc(transportation1),category:'Transport',  title: 'Fleet on the Road',         span: 'normal' },
+  { id: 7,  src: imgSrc(package2),      category: 'Packing',    title: 'Fragile Item Wrapping',     span: 'normal' },
+  { id: 8,  src: imgSrc(office1),       category: 'Office',     title: 'Corporate Relocation',      span: 'tall'   },
+  { id: 9,  src: imgSrc(transportation2),category:'Transport',  title: 'Long Distance Move',        span: 'wide'   },
+  { id: 10, src: imgSrc(storage2),      category: 'Storage',    title: 'Climate Controlled Units',  span: 'normal' },
+  { id: 11, src: imgSrc(home3),         category: 'Home Moving',title: 'Bedroom Relocation',        span: 'normal' },
+  { id: 12, src: imgSrc(package3),      category: 'Packing',    title: 'Secure Box Packing',        span: 'wide'   },
+  { id: 13, src: imgSrc(storage3),      category: 'Storage',    title: 'Warehouse Storage',         span: 'tall'   },
+  { id: 14, src: imgSrc(storage4),      category: 'Storage',    title: 'Organized Storage Space',   span: 'normal' },
+  { id: 15, src: imgSrc(team2),         category: 'Team',       title: 'Professional Movers',       span: 'wide'   },
 ];
 
 const CATEGORIES = ['All', 'Home Moving', 'Office', 'Packing', 'Transport', 'Storage', 'Team'];
 
-// ─── CSS injected once ────────────────────────────────────────────────────────
+// ─── CSS ──────────────────────────────────────────────────────────────────────
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
@@ -50,15 +77,14 @@ const STYLES = `
     display: block;
   }
 
-  /* Tall items span extra height via padding trick */
   .gallery-item img {
     width: 100%;
     display: block;
     object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .gallery-item.tall  img { height: 480px; }
-  .gallery-item.wide  img { height: 280px; }
+  .gallery-item.tall   img { height: 480px; }
+  .gallery-item.wide   img { height: 280px; }
   .gallery-item.normal img { height: 340px; }
 
   .gallery-item:hover img { transform: scale(1.06); }
@@ -129,7 +155,10 @@ const STYLES = `
     max-height: 85vh;
     animation: lbSlideUp 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
   }
-  @keyframes lbSlideUp { from { opacity:0; transform:translateY(24px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes lbSlideUp {
+    from { opacity:0; transform:translateY(24px) scale(0.97); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+  }
 
   .lightbox-img-wrap img {
     max-width: 90vw;
@@ -221,15 +250,31 @@ const STYLES = `
     font-weight: 700;
     letter-spacing: 0.1em;
   }
+
+  /* Hero center fix */
+  .hero-reveal-wrapper {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Shimmer animation */
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 `;
 
 // ─── Lightbox ────────────────────────────────────────────────────────────────
 function Lightbox({ images, index, onClose, onPrev, onNext }) {
   const img = images[index];
+
   useEffect(() => {
     const handler = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'Escape')     onClose();
+      if (e.key === 'ArrowLeft')  onPrev();
       if (e.key === 'ArrowRight') onNext();
     };
     window.addEventListener('keydown', handler);
@@ -239,12 +284,23 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
   return (
     <div className="lightbox-backdrop" onClick={onClose}>
       <div className="lightbox-img-wrap" onClick={e => e.stopPropagation()}>
-        <img src={img.src} alt={img.title} />
+        <img
+          src={img.src}
+          alt={img.title}
+          onError={e => { e.currentTarget.style.display = 'none'; }}
+        />
         <div className="lb-meta">
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '18px', color: 'white', display: 'block', marginBottom: '4px' }}>
+          <span style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '18px', color: 'white',
+            display: 'block', marginBottom: '4px',
+          }}>
             {img.title}
           </span>
-          <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#DC4B38' }}>
+          <span style={{
+            fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.2em', textTransform: 'uppercase', color: '#DC4B38',
+          }}>
             {img.category}
           </span>
           <div style={{ marginTop: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.35)' }}>
@@ -268,22 +324,20 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 const GalleryPage = () => {
-  const [images, setImages]         = useState(SAMPLE_IMAGES);
+  const [images]                    = useState(SAMPLE_IMAGES);
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightboxIdx, setLightboxIdx]       = useState(null);
-  const [layout, setLayout]                 = useState('masonry'); // 'masonry' | 'grid'
+  const [layout, setLayout]                 = useState('masonry');
   const [isLoading, setIsLoading]           = useState(false);
-
-  // Swap with: useEffect(() => { api.get('/gallery').then(setImages); }, []);
 
   const filtered = activeCategory === 'All'
     ? images
     : images.filter(img => img.category === activeCategory);
 
   const openLightbox  = (idx) => setLightboxIdx(idx);
-  const closeLightbox = ()    => setLightboxIdx(null);
-  const prevImage     = useCallback(() => setLightboxIdx(i => (i - 1 + filtered.length) % filtered.length), [filtered.length]);
-  const nextImage     = useCallback(() => setLightboxIdx(i => (i + 1) % filtered.length), [filtered.length]);
+  const closeLightbox = () => setLightboxIdx(null);
+  const prevImage = useCallback(() => setLightboxIdx(i => (i - 1 + filtered.length) % filtered.length), [filtered.length]);
+  const nextImage = useCallback(() => setLightboxIdx(i => (i + 1) % filtered.length),                  [filtered.length]);
 
   const handleCategory = (cat) => {
     setIsLoading(true);
@@ -298,8 +352,8 @@ const GalleryPage = () => {
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section style={{
-        backgroundColor: '#1A1E2E',
-        paddingTop: '160px',
+        backgroundColor: '#F5F0EB',
+        paddingTop: '100px',
         paddingBottom: '100px',
         position: 'relative',
         overflow: 'hidden',
@@ -309,7 +363,7 @@ const GalleryPage = () => {
         <div style={{
           position: 'absolute', top: '-200px', right: '-200px',
           width: '700px', height: '700px',
-          background: 'radial-gradient(circle, rgba(220,75,56,0.13) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(181,72,48,0.07) 0%, transparent 70%)',
           borderRadius: '50%', pointerEvents: 'none',
         }} />
         <div style={{
@@ -319,7 +373,7 @@ const GalleryPage = () => {
           borderRadius: '50%', pointerEvents: 'none',
         }} />
 
-        {/* Decorative horizontal rule */}
+        {/* Decorative vertical line */}
         <div style={{
           position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
           width: '1px', height: '80px',
@@ -327,39 +381,43 @@ const GalleryPage = () => {
         }} />
 
         <Container>
-          <Reveal>
-            <span style={{
-              display: 'block', color: '#DC4B38',
-              fontSize: '10px', fontWeight: 700,
-              letterSpacing: '0.4em', textTransform: 'uppercase',
-              marginBottom: '20px',
-            }}>
-              Our Work
-            </span>
-            <h1 style={{
-              color: '#FFFFFF',
-              fontSize: 'clamp(44px, 8vw, 80px)',
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontWeight: 700, lineHeight: 1.06,
-              marginBottom: '24px',
-            }}>
-              A Visual Story of{' '}
-              <span style={{ color: '#DC4B38', fontStyle: 'italic' }}>Excellence</span>
-            </h1>
-            <p style={{
-              color: 'rgba(255,255,255,0.42)',
-              fontSize: '16px', fontWeight: 300, lineHeight: 1.75,
-              maxWidth: '520px', margin: '0 auto 40px',
-            }}>
-              From careful packing to final placement — witness the precision and care
-              that goes into every Assure Sift move.
-            </p>
+          <div className="hero-reveal-wrapper">
+            <Reveal>
+              <span style={{
+                display: 'block', color: '#DC4B38',
+                fontSize: '10px', fontWeight: 700,
+                letterSpacing: '0.4em', textTransform: 'uppercase',
+                marginBottom: '20px',
+              }}>
+                Our Work
+              </span>
+              <h1 style={{
+                color: '#1A1E2E',
+                fontSize: 'clamp(44px, 8vw, 80px)',
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 700, lineHeight: 1.06,
+                marginBottom: '24px',
+                textAlign: 'center',
+              }}>
+                A Visual Story of{' '}
+                <span style={{ color: '#DC4B38', fontStyle: 'italic' }}>Excellence</span>
+              </h1>
+              <p style={{
+                color: '#1A1E2E',
+                fontSize: '16px', fontWeight: 300, lineHeight: 1.75,
+                maxWidth: '520px', margin: '0 auto 40px',
+                textAlign: 'center',
+              }}>
+                From careful packing to final placement — witness the precision and care
+                that goes into every Assure Sift move.
+              </p>
 
-            {/* Live count pill */}
-            <div className="count-badge" style={{ margin: '0 auto' }}>
-              {images.length} Photos
-            </div>
-          </Reveal>
+              {/* Live count pill */}
+              <div className="count-badge" style={{ margin: '0 auto' }}>
+                {images.length} Photos
+              </div>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
@@ -442,7 +500,6 @@ const GalleryPage = () => {
               </h2>
             </div>
 
-            {/* Subtle tip */}
             <p style={{
               fontSize: '12px', color: '#A09890', fontWeight: 400,
               display: filtered.length > 0 ? 'block' : 'none',
@@ -464,12 +521,9 @@ const GalleryPage = () => {
                   animation: 'shimmer 1.4s infinite',
                 }} />
               ))}
-              <style>{`@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
             </div>
           ) : filtered.length === 0 ? (
-            <div style={{
-              textAlign: 'center', paddingTop: '80px', paddingBottom: '80px',
-            }}>
+            <div style={{ textAlign: 'center', paddingTop: '80px', paddingBottom: '80px' }}>
               <p style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontSize: '24px', fontStyle: 'italic', color: '#A09890',
@@ -486,13 +540,20 @@ const GalleryPage = () => {
                   onClick={() => openLightbox(idx)}
                   style={{ animationDelay: `${idx * 0.05}s` }}
                 >
-                  <img src={img.src} alt={img.title} loading="lazy" />
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    loading="lazy"
+                    onError={e => {
+                      // Fallback: hide broken image gracefully
+                      e.currentTarget.style.opacity = '0.3';
+                    }}
+                  />
 
                   <div className="gallery-overlay">
                     <div className="overlay-zoom">
                       <ZoomIn size={16} color="white" />
                     </div>
-                    {/* Bottom meta */}
                     <span style={{
                       fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em',
                       textTransform: 'uppercase', color: '#DC4B38', marginBottom: '6px',
@@ -515,14 +576,13 @@ const GalleryPage = () => {
         </Container>
       </section>
 
-      {/* ── CTA Banner — mirrors homepage "Let's Join Us" section ────────── */}
+      {/* ── CTA Banner ────────────────────────────────────────────────────── */}
       <section style={{
         backgroundColor: '#DC4B38',
         paddingTop: '80px', paddingBottom: '80px',
         textAlign: 'center',
         position: 'relative', overflow: 'hidden',
       }}>
-        {/* Decorative circle */}
         <div style={{
           position: 'absolute', top: '-60px', left: '-60px',
           width: '300px', height: '300px',
@@ -558,18 +618,20 @@ const GalleryPage = () => {
           }}>
             Join thousands of happy customers who trusted Assure Sift with their move.
           </p>
-          <a href="/#services" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '10px',
-            backgroundColor: '#FFFFFF',
-            color: '#DC4B38',
-            fontSize: '11px', fontWeight: 700,
-            letterSpacing: '0.2em', textTransform: 'uppercase',
-            padding: '18px 44px',
-            borderRadius: '100px',
-            textDecoration: 'none',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-          }}
+          <a
+            href="/#services"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '10px',
+              backgroundColor: '#FFFFFF',
+              color: '#DC4B38',
+              fontSize: '11px', fontWeight: 700,
+              letterSpacing: '0.2em', textTransform: 'uppercase',
+              padding: '18px 44px',
+              borderRadius: '100px',
+              textDecoration: 'none',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            }}
             onMouseEnter={e => {
               e.currentTarget.style.transform = 'translateY(-2px)';
               e.currentTarget.style.boxShadow = '0 14px 40px rgba(0,0,0,0.22)';
