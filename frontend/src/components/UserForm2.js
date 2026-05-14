@@ -226,7 +226,7 @@ const UserForm2 = ({ selectedService, compact = false }) => {
         };
 
         try {
-            await api.post('/users/createEnquiry', updatedFormData);
+            await api.post('users/createEnquiry', updatedFormData);
             alert('User data submitted successfully');
             handleReset();
         } catch (error) {

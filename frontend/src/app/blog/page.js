@@ -22,7 +22,7 @@ const BlogPage = () => {
     const fetchBlogs = async () => {
         setIsLoading(true);
         try {
-            const data = await api.get('/blogs');
+            const data = await api.get('blogs');
             setBlogs(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching blogs:', error);

@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const { createTablesIfNotExists, createDatabaseIfNotExists } = require('./createTable');
 const errorHandler = require('./src/middlewares/errorHandler');
-
+const routes = require('./src/routes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,8 +12,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 const allowedOrigins = [
     'https://assure-sift.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:5173'
+    'http://localhost:3000'
 ];
 
 app.use(cors({
@@ -51,10 +50,7 @@ app.get('/', (req, res) => {
 });
 
 // Modular Routes
-app.use('/api/contact', require('./src/routes/contactRoutes'));
-app.use('/api/blogs', require('./src/routes/blogRoutes'));
-app.use('/api/admin', require('./src/routes/adminRoutes'));
-app.use('/api/users', require('./src/routes/userRoutes'));
+app.use('/api', routes);
 
 // Error handling middleware
 app.use(errorHandler);

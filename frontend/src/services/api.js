@@ -11,9 +11,15 @@ const api = axios.create({
     },
 });
 
-// Add a request interceptor to include the auth token
+// Add a request interceptor to include the auth token and fix baseURL path overriding
 api.interceptors.request.use(
     (config) => {
+        // If the URL starts with a slash, it will override the baseURL path in Axios.
+        // We strip the leading slash to ensure it appends to the baseURL (which includes /api).
+        if (config.url && config.url.startsWith('/')) {
+            config.url = config.url.substring(1);
+        }
+
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('token');
             if (token) {

@@ -54,7 +54,7 @@ export default function ContactUsPage() {
         };
 
         try {
-            await api.post('/contact', updatedFormData);
+            await api.post('contact', updatedFormData);
             alert('Your message has been sent successfully. We will get back to you soon!');
             handleReset();
         } catch (error) {
