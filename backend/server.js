@@ -11,14 +11,16 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 const allowedOrigins = [
-    'https://assure-sift.vercel.app',
-    'http://localhost:3000'
+    'https://www.assuresiftrelocation.com',
+    'https://assuresiftrelocation.com',
+    'https://assure-sift.vercel.app', // optional fallback
+    'http://localhost:3000',
+    'http://localhost:5173'
 ];
 
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
