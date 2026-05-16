@@ -16,8 +16,14 @@ const jost = Jost({
 });
 
 export const metadata = {
-  title: "Assure Sift | Premium Relocation Services",
+  title: "Assure Sift Relocation",
   description: "India's largest and most awarded movers. Experience architectural minimalism and refined hospitality in relocation.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg?v=1", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.svg?v=1",
+  },
 };
 
 export default function RootLayout({ children }) {
