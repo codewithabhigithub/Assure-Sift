@@ -26,7 +26,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#1A1A2E] mb-6"
+            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[#1A1A2E] mb-6  "
           >
             Your Trusted Partner<br />
             for Seamless <span className="italic text-[#C4472A]">Relocation</span>
@@ -45,7 +45,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap gap-4 mb-10"
+            className="flex flex-wrap gap-4 mb-10 "
           >
             <Link href="/#services" className="bg-[#C4472A] text-white font-semibold px-8 py-3.5 rounded-full hover:bg-[#A63A22] transition-colors shadow-lg shadow-[#C4472A]/20 inline-block text-center">
               Book Now →

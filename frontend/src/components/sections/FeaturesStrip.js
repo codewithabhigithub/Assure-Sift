@@ -23,7 +23,7 @@ export const FeaturesStrip = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex flex-col items-start"
+              className="flex flex-col items-center"
             >
               <div className="text-[#C4472A]">
                 {React.cloneElement(feature.icon, { strokeWidth: 1.5 })}
@@ -31,7 +31,7 @@ export const FeaturesStrip = () => {
               <h3 className="font-body font-semibold text-[16px] text-[#1A1A2E] mt-4">
                 {feature.title}
               </h3>
-              <p className="font-body text-[13px] text-[#888] mt-2 line-height-[1.7]">
+              <p className="font-body text-[13px] text-[#888] mt-2 line-height-[1.7] text-center">
                 {feature.desc}
               </p>
             </motion.div>

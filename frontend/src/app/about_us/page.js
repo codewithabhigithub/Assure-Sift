@@ -175,19 +175,19 @@ export default function AboutUsPage() {
             <h2 className="font-display font-bold text-[48px] text-[#1A1A2E] mt-4">Our Mission & Vision</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-[32px]">
+          <div className="grid md:grid-cols-2 gap-[32px] ">
             {/* LEFT — Mission Card */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[20px] p-[48px] shadow-[0_2px_24px_rgba(0,0,0,0.06)] border-t-[4px] border-[#C4472A]"
+              className="bg-white rounded-[20px] p-[48px] shadow-[0_2px_24px_rgba(0,0,0,0.06)] border-t-[4px] border-[#C4472A] items-center flex flex-col "
             >
               <Target size={40} className="text-[#C4472A] stroke-[1.5]" />
               <span className="block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4472A] mt-[24px]">OUR MISSION</span>
-              <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px]">Redefining the Moving Experience</h3>
-              <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px]">
+              <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px] text-center">Redefining the Moving Experience</h3>
+              <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px] text-justify">
                 At Assure Sift Relocation, our mission is to redefine the moving experience by delivering exceptional service that exceeds our customers&apos; expectations. We strive to alleviate the stress and hassle often associated with relocation by offering efficient, affordable, and personalized solutions tailored to meet the unique needs of each client. Our commitment to reliability, professionalism, and customer satisfaction drives everything we do.
               </p>
             </motion.div>
@@ -198,12 +198,12 @@ export default function AboutUsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[20px] p-[48px] shadow-[0_2px_24px_rgba(0,0,0,0.06)] border-t-[4px] border-[#1A1A2E]"
+              className="bg-white rounded-[20px] p-[48px] shadow-[0_2px_24px_rgba(0,0,0,0.06)] border-t-[4px] border-[#1A1A2E] items-center flex flex-col"
             >
               <Telescope size={40} className="text-[#1A1A2E] stroke-[1.5]" />
               <span className="block font-body text-[11px] font-bold uppercase tracking-[0.15em] text-[#1A1A2E]">OUR VISION</span>
-              <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px]">Setting the Industry Standard</h3>
-              <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px]">
+              <h3 className="font-display font-semibold text-[28px] text-[#1A1A2E] mt-[8px] text-center">Setting the Industry Standard</h3>
+              <p className="font-body text-[15px] text-[#555] leading-[1.85] mt-[16px] text-justify">
                 Our vision at Assure Sift Relocation is to become the leading provider of packing and moving services, known for our integrity, quality, and innovation. We aim to set the industry standard for excellence by continuously improving our processes, investing in our team members, and embracing technology to enhance the customer experience. We envision a future where every relocation is a seamless and stress-free experience, thanks to the trusted services of Assure Sift Relocation.
               </p>
             </motion.div>
@@ -253,7 +253,7 @@ export default function AboutUsPage() {
             <h2 className="font-display font-bold text-[48px] text-[#1A1A2E] mt-4">Our Core Values</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px] ">
             {[
               { 
                 title: "Experience", 
@@ -274,11 +274,11 @@ export default function AboutUsPage() {
               <motion.div
                 key={i}
                 whileHover={{ y: -6 }}
-                className="border-l-[4px] border-[#C4472A] rounded-r-[16px] p-[36px] bg-white shadow-[0_2px_24px_rgba(0,0,0,0.06)]"
+                className="border-l-[4px] border-[#C4472A] rounded-r-[16px] p-[36px] bg-white shadow-[0_2px_24px_rgba(0,0,0,0.06)] items-center flex flex-col"
               >
                 <v.icon size={32} className="text-[#C4472A] stroke-[1.5]" />
-                <h3 className="font-display font-semibold text-[24px] text-[#1A1A2E] mt-[12px] mb-[8px]">{v.title}</h3>
-                <p className="font-body text-[14px] text-[#666] leading-[1.8]">{v.desc}</p>
+                <h3 className="font-display font-semibold text-[24px] text-[#1A1A2E] mt-[12px] mb-[8px] text-center">{v.title}</h3>
+                <p className="font-body text-[14px] text-[#666] leading-[1.8] text-center">{v.desc}</p>
               </motion.div>
             ))}
           </div>

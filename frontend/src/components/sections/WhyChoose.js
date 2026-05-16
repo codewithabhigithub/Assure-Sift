@@ -74,18 +74,18 @@ export const WhyChoose = () => {
         </div>
 
         {/* FEATURE CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 ">
           {cards.map((c, i) => (
             <motion.div 
               key={i}
               whileHover={{ y: -5 }}
-              className="bg-[#F8F6F2] border-l-4 border-[#C4472A] rounded-r-xl p-8 shadow-sm"
+              className="bg-[#F8F6F2] border-l-4 border-[#C4472A] rounded-r-xl p-8 shadow-sm  flex justify-center flex-col items-center"
             >
-              <div className="text-[#C4472A] mb-4">
+              <div className="text-[#C4472A] mb-4 ">
                 <c.icon size={32} />
               </div>
               <h3 className="font-display font-bold text-xl text-[#1A1A2E] mb-3">{c.title}</h3>
-              <p className="font-body text-sm text-[#666] leading-relaxed">{c.desc}</p>
+              <p className="font-body text-sm text-[#666] leading-relaxed text-center">{c.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -47,48 +47,51 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Col 2 — Quick Links */}
-          <div>
-            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-6">QUICK LINKS</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { name: 'Home', href: '/' },
-                { name: 'About Us', href: '/about_us' },
-                { name: 'Our Services', href: '/#services' },
-                { name: 'Gallery', href: '/gallery' },
-                { name: 'Contact Us', href: '/contact_us' }
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className='flex justify-evenly gap-16 '>
+            {/* Col 2 — Quick Links */}
+            <div>
+              <h4 className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-white/70 mb-6">QUICK LINKS</h4>
+              <ul className="flex flex-col gap-3 ">
+                {[
+                  { name: 'Home', href: '/' },
+                  { name: 'About Us', href: '/about_us' },
+                  { name: 'Our Services', href: '/#services' },
+                  { name: 'Gallery', href: '/gallery' },
+                  { name: 'Contact Us', href: '/contact_us' }
+                ].map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Col 3 — Company */}
-          <div>
-            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-6">COMPANY</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { name: 'Team', href: '#' },
-                { name: 'Career', href: '#' },
-                { name: 'Blog', href: '/blog' },
-                { name: 'Admin Login', href: '/login' }
-              ].map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {/* Col 3 — Company */}
+            <div>
+              <h4 className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-white/70 mb-6">COMPANY</h4>
+              <ul className="flex flex-col gap-3">
+                {[
+                  { name: 'Team', href: '#' },
+                  { name: 'Career', href: '#' },
+                  { name: 'Blog', href: '/blog' },
+                  { name: 'Admin Login', href: '/login' }
+                ].map((item) => (
+                  <li key={item.name}>
+                    <Link href={item.href} className="font-body text-[14px] text-white/65 hover:text-white transition-colors leading-[2.2]">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
 
           {/* Col 4 — Contact */}
           <div>
-            <h4 className="font-body text-[10px] font-bold uppercase tracking-[0.15em] text-white/35 mb-6">CONTACT INFORMATION</h4>
+            <h4 className="font-body text-[11px] font-bold uppercase tracking-[0.15em] text-white/70 mb-6">CONTACT INFORMATION</h4>
             <div className="flex flex-col gap-4">
               <div className="flex gap-3 items-start">
                 <MapPin size={16} className="text-[#C4472A] mt-1 shrink-0" />
