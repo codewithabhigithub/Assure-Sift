@@ -83,10 +83,11 @@ export const Footer = () => {
             </h4>
             <ul className="flex flex-col gap-2 sm:gap-3">
               {[
-                { name: 'Team', href: '#' },
-                { name: 'Career', href: '#' },
                 { name: 'Blog', href: '/blog' },
                 { name: 'Admin Login', href: '/login' },
+                { name: 'Privacy Policy', href: '/privacy-policy' },
+                { name: 'Terms & Conditions', href: '/term-condition' },
+                { name: 'Refund & Cancellation', href: '/refund-cancellation' },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
