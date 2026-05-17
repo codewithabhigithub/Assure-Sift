@@ -52,7 +52,7 @@ export const AboutSection = () => {
               </p>
             </div>
             
-            <a href="#" className="font-body font-medium text-[14px] text-[#C4472A] hover:underline mb-8">
+            <a href="/about_us" className="font-body font-medium text-[14px] text-[#C4472A] hover:underline mb-8">
               Read More →
             </a>
             
