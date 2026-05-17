@@ -30,6 +30,7 @@ export const Navbar = () => {
         : 'bg-transparent h-[72px]'
       }`}>
       <div className="max-w-[1240px] mx-auto h-full px-[40px] flex items-center justify-between">
+
         {/* Logo Section */}
         <Link href="/" className="flex flex-col">
           <div className="flex items-center gap-2">
@@ -41,7 +42,7 @@ export const Navbar = () => {
             </svg>
             <span className="font-display font-bold text-[22px] text-[#1A1A2E] leading-tight">Assure Sift Relocation</span>
           </div>
-          <span className="font-body text-[9px] tracking-[0.15em] text-[#E8E4DC] ml-[32px] -mt-1 font-medium" style={{color:'#C4472A'}}>RELOCATION SERVICES</span>
+          <span className="font-body text-[9px] tracking-[0.15em] ml-[32px] -mt-1 font-medium" style={{ color: '#C4472A' }}>RELOCATION SERVICES</span>
         </Link>
 
         {/* Desktop Links */}
@@ -58,13 +59,19 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden lg:block">
+        {/* CTA Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/#services"
             className="bg-[#C4472A] text-white font-body font-semibold text-[14px] px-[28px] py-[12px] rounded-[50px] hover:bg-[#A63A22] transition-colors flex items-center gap-2"
           >
             Get Free Quotation →
+          </Link>
+          <Link
+            href="/login"
+            className="border border-[#1A1A2E] text-[#1A1A2E] font-body font-semibold text-[14px] px-[24px] py-[12px] rounded-[50px] hover:bg-[#1A1A2E] hover:text-white transition-colors"
+          >
+            Admin
           </Link>
         </div>
 
@@ -103,10 +110,18 @@ export const Navbar = () => {
                 >
                   Get Free Quotation →
                 </Link>
+                <Link
+                  href="/login"
+                  className="border border-[#1A1A2E] text-[#1A1A2E] text-center py-4 rounded-[50px] font-semibold hover:bg-[#1A1A2E] hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Admin
+                </Link>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
       </div>
     </nav>
   );
