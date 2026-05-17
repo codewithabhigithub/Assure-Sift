@@ -644,7 +644,7 @@ const PaymentPage = () => {
                 <div className="pp-contact-icon"><Mail size={22} /></div>
                 <div>
                   <p className="pp-contact-label">Email Concierge</p>
-                  <p className="pp-contact-value">info@assuresift.in</p>
+                  <p className="pp-contact-value">assuresiftrelocation6@gmail.com</p>
                 </div>
               </div>
               <div className="pp-contact-divider" />
@@ -652,7 +652,7 @@ const PaymentPage = () => {
                 <div className="pp-contact-icon"><Phone size={22} /></div>
                 <div>
                   <p className="pp-contact-label">Direct Priority</p>
-                  <p className="pp-contact-value">+91 907 329 1732</p>
+                  <p className="pp-contact-value">+91 701 432 9644</p>
                 </div>
               </div>
             </div>
