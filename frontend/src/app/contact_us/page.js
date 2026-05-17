@@ -145,7 +145,7 @@ export default function ContactUsPage() {
                             <p className="font-body text-[14px] text-[#666] leading-[1.8] mt-2">
                                 +91-8619771107<br />
                                 +91-7014329644<br />
-                                info@assuresift.com
+                                assuresiftrelocation6@gmail.com
                             </p>
                         </motion.div>
                     </div>
@@ -293,7 +293,7 @@ export default function ContactUsPage() {
                             <div className="bg-white rounded-[16px] p-[32px] shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
                                 <h3 className="font-body font-semibold text-[15px] text-[#1A1A2E] mb-[16px]">Quick Connect</h3>
                                 <a
-                                    href="tel:+918619771107"
+                                    href="tel:+917014329644"
                                     className="block w-full text-center border-[1.5px] border-[#C4472A] text-[#C4472A] rounded-[50px] py-[12px] font-body font-medium text-[14px] hover:bg-[#C4472A] hover:text-white transition-colors"
                                 >
                                     📞 Call Now
