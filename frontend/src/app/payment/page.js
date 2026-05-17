@@ -445,7 +445,6 @@ const PaymentPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
 
   const handlePayment = async () => {
     if (!window.Razorpay) {
@@ -461,7 +460,7 @@ const PaymentPage = () => {
       description: "Secure Relocation Payment",
       image: "/favicon.jpeg",
       handler: function (response) {
-        alert(Payment successful! ID: ${response.razorpay_payment_id});
+        alert(`Payment successful! ID: ${response.razorpay_payment_id}`);
         setIsProcessing(false);
       },
       prefill: {
@@ -484,7 +483,6 @@ const PaymentPage = () => {
     }
     handlePayment();
   };
-  
 
   const steps = [
     "Verify your Enquiry ID and registered Mobile.",
