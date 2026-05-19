@@ -34,9 +34,12 @@ const styles = `
   /* HERO */
   .tc-hero {
     background: var(--navy);
-    padding: 160px 0 80px;
+    padding: 120px 0 60px;
     position: relative;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .tc-hero { padding: 160px 0 80px; }
   }
   .tc-hero::before {
     content: '';
@@ -61,7 +64,7 @@ const styles = `
   .tc-breadcrumb span { color: var(--accent); }
   .tc-hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 6vw, 72px);
     font-weight: 400;
     color: var(--white);
     margin: 0 0 20px;
@@ -70,43 +73,53 @@ const styles = `
   }
   .tc-hero h1 em { font-style: italic; color: var(--accent); }
   .tc-hero-desc {
-    font-size: 16px;
+    font-size: 15px;
     color: rgba(255,255,255,0.48);
     font-weight: 300;
     line-height: 1.7;
     max-width: 560px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .tc-hero-desc { font-size: 16px; margin-bottom: 40px; }
   }
   .tc-hero-meta {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     flex-wrap: wrap;
+  }
+  @media (min-width: 768px) {
+    .tc-hero-meta { gap: 32px; }
   }
   .tc-hero-meta-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.35);
   }
+  @media (min-width: 768px) {
+    .tc-hero-meta-item { font-size: 10px; }
+  }
   .tc-hero-meta-item svg { color: var(--accent); }
 
   /* LAYOUT */
   .tc-container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-  @media (max-width: 600px) { .tc-container { padding: 0 20px; } }
+  @media (max-width: 600px) { .tc-container { padding: 0 16px; } }
 
-  .tc-body { padding: 72px 0 120px; }
+  .tc-body { padding: 48px 0 80px; }
+  @media (min-width: 768px) { .tc-body { padding: 72px 0 120px; } }
   .tc-grid {
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 56px;
     align-items: start;
   }
-  @media (max-width: 860px) { .tc-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .tc-grid { grid-template-columns: 1fr; gap: 32px; } }
 
   /* SIDEBAR */
   .tc-nav-card {
@@ -118,21 +131,25 @@ const styles = `
     box-shadow: var(--shadow-soft);
     overflow: hidden;
   }
+  @media (max-width: 860px) {
+    .tc-nav-card { position: relative; top: 0; }
+  }
   .tc-nav-header {
     background: var(--accent);
-    padding: 20px 24px;
+    padding: 16px 20px;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--white);
   }
+  @media (min-width: 768px) { .tc-nav-header { padding: 20px 24px; } }
   .tc-nav-list { list-style: none; margin: 0; padding: 12px 0; }
   .tc-nav-item a {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 13px;
     font-weight: 500;
     color: var(--text-muted);
@@ -140,6 +157,7 @@ const styles = `
     transition: var(--transition);
     border-left: 3px solid transparent;
   }
+  @media (min-width: 768px) { .tc-nav-item a { padding: 12px 24px; } }
   .tc-nav-item a:hover,
   .tc-nav-item a.active {
     color: var(--accent);
@@ -148,22 +166,24 @@ const styles = `
   }
 
   /* CONTENT */
-  .tc-content { display: flex; flex-direction: column; gap: 40px; }
+  .tc-content { display: flex; flex-direction: column; gap: 32px; min-width: 0; max-width: 100%; }
+  @media (min-width: 768px) { .tc-content { gap: 40px; } }
 
   /* ALERT BANNER */
   .tc-alert {
     background: var(--accent-pale);
     border: 1px solid rgba(196,71,42,0.2);
     border-radius: 12px;
-    padding: 18px 24px;
+    padding: 16px 20px;
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    font-size: 14px;
+    gap: 12px;
+    font-size: 13px;
     color: var(--accent-dark);
     font-weight: 400;
     line-height: 1.6;
   }
+  @media (min-width: 768px) { .tc-alert { padding: 18px 24px; font-size: 14px; gap: 14px; } }
   .tc-alert svg { flex-shrink: 0; margin-top: 2px; }
 
   .tc-section-card {
@@ -177,14 +197,15 @@ const styles = `
   .tc-section-head {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 28px 36px;
+    gap: 12px;
+    padding: 20px 24px;
     border-bottom: 1px solid var(--cream-dark);
     background: var(--cream);
   }
+  @media (min-width: 768px) { .tc-section-head { gap: 16px; padding: 28px 36px; } }
   .tc-section-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 36px; height: 36px;
+    border-radius: 8px;
     background: var(--accent-pale);
     border: 1px solid rgba(196,71,42,0.15);
     display: flex;
@@ -193,84 +214,95 @@ const styles = `
     color: var(--accent);
     flex-shrink: 0;
   }
+  @media (min-width: 768px) { .tc-section-icon { width: 44px; height: 44px; border-radius: 10px; } }
   .tc-section-title {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--text-dark);
     margin: 0;
     letter-spacing: -0.2px;
   }
-  .tc-section-body { padding: 32px 36px; }
+  @media (min-width: 768px) { .tc-section-title { font-size: 22px; } }
+  .tc-section-body { padding: 24px; }
+  @media (min-width: 768px) { .tc-section-body { padding: 32px 36px; } }
   .tc-section-body p {
-    font-size: 15px;
-    line-height: 1.78;
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--text-body);
     font-weight: 300;
     margin: 0 0 16px;
   }
+  @media (min-width: 768px) { .tc-section-body p { font-size: 15px; line-height: 1.78; margin: 0 0 16px; } }
   .tc-section-body p:last-child { margin-bottom: 0; }
   .tc-section-body h4 {
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--text-dark);
-    margin: 28px 0 12px;
+    margin: 24px 0 10px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--cream-dark);
   }
+  @media (min-width: 768px) { .tc-section-body h4 { font-size: 17px; margin: 28px 0 12px; } }
   .tc-list {
     list-style: none;
     margin: 0 0 16px;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
+  @media (min-width: 768px) { .tc-list { gap: 10px; } }
   .tc-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15px;
-    line-height: 1.65;
+    position: relative;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.5;
     color: var(--text-body);
     font-weight: 300;
   }
+  @media (min-width: 768px) { .tc-list li { font-size: 15px; line-height: 1.65; padding-left: 24px; } }
   .tc-list li::before {
     content: '';
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 8px;
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
-    margin-top: 8px;
   }
+  @media (min-width: 768px) { .tc-list li::before { top: 9px; } }
 
   /* TABLE */
-  .tc-table-wrap { overflow-x: auto; margin: 16px 0; }
+  .tc-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; box-shadow: 0 0 0 1px var(--cream-dark); }
   .tc-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 13px;
   }
+  @media (min-width: 768px) { .tc-table { font-size: 14px; } }
   .tc-table th {
     background: var(--navy);
     color: var(--white);
-    padding: 12px 20px;
+    padding: 12px 16px;
     text-align: left;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
+  @media (min-width: 768px) { .tc-table th { padding: 12px 20px; font-size: 10px; } }
   .tc-table th:first-child { border-radius: 8px 0 0 0; }
   .tc-table th:last-child  { border-radius: 0 8px 0 0; }
   .tc-table td {
-    padding: 14px 20px;
+    padding: 12px 16px;
     border-bottom: 1px solid var(--cream-dark);
     color: var(--text-body);
     font-weight: 300;
     vertical-align: top;
   }
+  @media (min-width: 768px) { .tc-table td { padding: 14px 20px; } }
   .tc-table tr:last-child td { border-bottom: none; }
   .tc-table tr:nth-child(even) td { background: var(--cream); }
 
@@ -278,15 +310,16 @@ const styles = `
   .tc-contact-card {
     background: var(--navy);
     border-radius: var(--radius-card);
-    padding: 44px 40px;
+    padding: 32px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 24px;
     flex-wrap: wrap;
     position: relative;
     overflow: hidden;
   }
+  @media (min-width: 768px) { .tc-contact-card { padding: 44px 40px; gap: 32px; } }
   .tc-contact-card::before {
     content: '';
     position: absolute;
@@ -308,7 +341,10 @@ const styles = `
     font-weight: 300;
     margin: 0;
   }
-  .tc-contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .tc-contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 600px) {
+    .tc-contact-links { flex-direction: column; width: 100%; }
+  }
   .tc-contact-link {
     display: flex;
     align-items: center;
@@ -322,9 +358,13 @@ const styles = `
     color: var(--white);
     text-decoration: none;
     transition: var(--transition);
+    word-break: break-all;
+  }
+  @media (max-width: 600px) {
+    .tc-contact-link { justify-content: center; width: 100%; font-size: 12px; padding: 10px 14px; }
   }
   .tc-contact-link:hover { background: var(--accent); border-color: var(--accent); }
-  .tc-contact-link svg { color: var(--accent); }
+  .tc-contact-link svg { color: var(--accent); flex-shrink: 0; }
   .tc-contact-link:hover svg { color: var(--white); }
 
   .tc-label {
@@ -345,7 +385,7 @@ const sections = [
         title: "Acceptance of Terms",
         content: (
             <>
-                <p>By accessing our website, requesting a quotation, booking a service, or making a payment, you confirm that you have read, understood, and agree to be bound by these Terms and Conditions. These terms constitute a legally binding agreement between you ("Client") and Assure Sift Relocation ("Company").</p>
+                <p>By accessing our website, requesting a quotation, booking a service, or making a payment, you confirm that you have read, understood, and agree to be bound by these Terms and Conditions. These terms constitute a legally binding agreement between you {`"Client"`} and Assure Sift Relocation {`"Company"`}.</p>
                 <p>If you are acting on behalf of a corporation or other legal entity, you represent that you have the authority to bind that entity to these terms. If you do not have such authority, or do not agree to these terms, you must not use our services.</p>
                 <p>We reserve the right to modify these terms at any time. Changes take effect upon posting to our website. Continued use of our services after such changes constitutes your acceptance of the revised terms.</p>
             </>

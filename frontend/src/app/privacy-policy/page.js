@@ -34,9 +34,12 @@ const styles = `
   /* ── HERO ── */
   .lp-hero {
     background: var(--navy);
-    padding: 160px 0 80px;
+    padding: 120px 0 60px;
     position: relative;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .lp-hero { padding: 160px 0 80px; }
   }
   .lp-hero::before {
     content: '';
@@ -69,7 +72,7 @@ const styles = `
   .lp-breadcrumb span { color: var(--accent); }
   .lp-hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 6vw, 72px);
     font-weight: 400;
     color: var(--white);
     margin: 0 0 20px;
@@ -78,43 +81,53 @@ const styles = `
   }
   .lp-hero h1 em { font-style: italic; color: var(--accent); }
   .lp-hero-desc {
-    font-size: 16px;
+    font-size: 15px;
     color: rgba(255,255,255,0.5);
     font-weight: 300;
     line-height: 1.7;
     max-width: 560px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .lp-hero-desc { font-size: 16px; margin-bottom: 40px; }
   }
   .lp-hero-meta {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     flex-wrap: wrap;
+  }
+  @media (min-width: 768px) {
+    .lp-hero-meta { gap: 32px; }
   }
   .lp-hero-meta-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.35);
   }
+  @media (min-width: 768px) {
+    .lp-hero-meta-item { font-size: 10px; }
+  }
   .lp-hero-meta-item svg { color: var(--accent); }
 
   /* ── LAYOUT ── */
   .lp-container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-  @media (max-width: 600px) { .lp-container { padding: 0 20px; } }
+  @media (max-width: 600px) { .lp-container { padding: 0 16px; } }
 
-  .lp-body { padding: 72px 0 120px; }
+  .lp-body { padding: 48px 0 80px; }
+  @media (min-width: 768px) { .lp-body { padding: 72px 0 120px; } }
   .lp-grid {
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 56px;
     align-items: start;
   }
-  @media (max-width: 860px) { .lp-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .lp-grid { grid-template-columns: 1fr; gap: 32px; } }
 
   /* ── STICKY SIDEBAR ── */
   .lp-nav-card {
@@ -128,19 +141,20 @@ const styles = `
   }
   .lp-nav-header {
     background: var(--accent);
-    padding: 20px 24px;
+    padding: 16px 20px;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--white);
   }
+  @media (min-width: 768px) { .lp-nav-header { padding: 20px 24px; } }
   .lp-nav-list { list-style: none; margin: 0; padding: 12px 0; }
   .lp-nav-item a {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 13px;
     font-weight: 500;
     color: var(--text-muted);
@@ -148,6 +162,7 @@ const styles = `
     transition: var(--transition);
     border-left: 3px solid transparent;
   }
+  @media (min-width: 768px) { .lp-nav-item a { padding: 12px 24px; } }
   .lp-nav-item a:hover,
   .lp-nav-item a.active {
     color: var(--accent);
@@ -157,7 +172,8 @@ const styles = `
   .lp-nav-item a svg { flex-shrink: 0; }
 
   /* ── CONTENT ── */
-  .lp-content { display: flex; flex-direction: column; gap: 40px; }
+  .lp-content { display: flex; flex-direction: column; gap: 32px; min-width: 0; max-width: 100%; }
+  @media (min-width: 768px) { .lp-content { gap: 40px; } }
 
   .lp-section-card {
     background: var(--white);
@@ -170,14 +186,15 @@ const styles = `
   .lp-section-head {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 28px 36px;
+    gap: 12px;
+    padding: 20px 24px;
     border-bottom: 1px solid var(--cream-dark);
     background: var(--cream);
   }
+  @media (min-width: 768px) { .lp-section-head { gap: 16px; padding: 28px 36px; } }
   .lp-section-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 36px; height: 36px;
+    border-radius: 8px;
     background: var(--accent-pale);
     border: 1px solid rgba(196,71,42,0.15);
     display: flex;
@@ -186,71 +203,80 @@ const styles = `
     color: var(--accent);
     flex-shrink: 0;
   }
+  @media (min-width: 768px) { .lp-section-icon { width: 44px; height: 44px; border-radius: 10px; } }
   .lp-section-title {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--text-dark);
     margin: 0;
     letter-spacing: -0.2px;
   }
-  .lp-section-body { padding: 32px 36px; }
+  @media (min-width: 768px) { .lp-section-title { font-size: 22px; } }
+  .lp-section-body { padding: 24px; }
+  @media (min-width: 768px) { .lp-section-body { padding: 32px 36px; } }
   .lp-section-body p {
-    font-size: 15px;
-    line-height: 1.78;
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--text-body);
     font-weight: 300;
-    margin: 0 0 18px;
+    margin: 0 0 16px;
   }
+  @media (min-width: 768px) { .lp-section-body p { font-size: 15px; line-height: 1.78; margin: 0 0 18px; } }
   .lp-section-body p:last-child { margin-bottom: 0; }
   .lp-section-body h4 {
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--text-dark);
-    margin: 28px 0 12px;
+    margin: 24px 0 10px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--cream-dark);
   }
+  @media (min-width: 768px) { .lp-section-body h4 { font-size: 17px; margin: 28px 0 12px; } }
   .lp-list {
     list-style: none;
-    margin: 0 0 18px;
+    margin: 0 0 16px;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
+  @media (min-width: 768px) { .lp-list { margin: 0 0 18px; gap: 10px; } }
   .lp-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15px;
-    line-height: 1.65;
+    position: relative;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.5;
     color: var(--text-body);
     font-weight: 300;
   }
+  @media (min-width: 768px) { .lp-list li { font-size: 15px; line-height: 1.65; padding-left: 24px; } }
   .lp-list li::before {
     content: '';
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 8px;
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
-    margin-top: 8px;
   }
+  @media (min-width: 768px) { .lp-list li::before { top: 9px; } }
 
   /* ── CONTACT FOOTER CARD ── */
   .lp-contact-card {
     background: var(--navy);
     border-radius: var(--radius-card);
-    padding: 44px 40px;
+    padding: 32px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 24px;
     flex-wrap: wrap;
     position: relative;
     overflow: hidden;
   }
+  @media (min-width: 768px) { .lp-contact-card { padding: 44px 40px; gap: 32px; } }
   .lp-contact-card::before {
     content: '';
     position: absolute;
@@ -272,7 +298,10 @@ const styles = `
     font-weight: 300;
     margin: 0;
   }
-  .lp-contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .lp-contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 600px) {
+    .lp-contact-links { flex-direction: column; width: 100%; }
+  }
   .lp-contact-link {
     display: flex;
     align-items: center;
@@ -286,6 +315,10 @@ const styles = `
     color: var(--white);
     text-decoration: none;
     transition: var(--transition);
+    word-break: break-all;
+  }
+  @media (max-width: 600px) {
+    .lp-contact-link { justify-content: center; width: 100%; font-size: 12px; padding: 10px 14px; }
   }
   .lp-contact-link:hover { background: var(--accent); border-color: var(--accent); }
   .lp-contact-link svg { color: var(--accent); flex-shrink: 0; }
@@ -310,8 +343,8 @@ const sections = [
     title: "Introduction",
     content: (
       <>
-        <p>Assure Sift Relocation ("we," "our," or "us") is committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our relocation services.</p>
-        <p>Please read this policy carefully. If you disagree with its terms, please discontinue use of our site. We reserve the right to make changes to this policy at any time and for any reason. We will alert you about any changes by updating the "Last Updated" date of this policy.</p>
+        <p>Assure Sift Relocation {`("we," "our," or "us")`} is committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our relocation services.</p>
+        <p>Please read this policy carefully. If you disagree with its terms, please discontinue use of our site. We reserve the right to make changes to this policy at any time and for any reason. We will alert you about any changes by updating the {`"Last Updated"`} date of this policy.</p>
       </>
     ),
   },

@@ -36,9 +36,12 @@ const styles = `
   /* HERO */
   .rc-hero {
     background: var(--navy);
-    padding: 160px 0 80px;
+    padding: 120px 0 60px;
     position: relative;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .rc-hero { padding: 160px 0 80px; }
   }
   .rc-hero::before {
     content: '';
@@ -63,7 +66,7 @@ const styles = `
   .rc-breadcrumb span { color: var(--accent); }
   .rc-hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(38px, 5.5vw, 68px);
+    font-size: clamp(32px, 5.5vw, 68px);
     font-weight: 400;
     color: var(--white);
     margin: 0 0 20px;
@@ -72,43 +75,53 @@ const styles = `
   }
   .rc-hero h1 em { font-style: italic; color: var(--accent); }
   .rc-hero-desc {
-    font-size: 16px;
+    font-size: 15px;
     color: rgba(255,255,255,0.48);
     font-weight: 300;
     line-height: 1.7;
     max-width: 560px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .rc-hero-desc { font-size: 16px; margin-bottom: 40px; }
   }
   .rc-hero-meta {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     flex-wrap: wrap;
+  }
+  @media (min-width: 768px) {
+    .rc-hero-meta { gap: 32px; }
   }
   .rc-hero-meta-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.35);
   }
+  @media (min-width: 768px) {
+    .rc-hero-meta-item { font-size: 10px; }
+  }
   .rc-hero-meta-item svg { color: var(--accent); }
 
   /* LAYOUT */
   .rc-container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-  @media (max-width: 600px) { .rc-container { padding: 0 20px; } }
+  @media (max-width: 600px) { .rc-container { padding: 0 16px; } }
 
-  .rc-body { padding: 72px 0 120px; }
+  .rc-body { padding: 48px 0 80px; }
+  @media (min-width: 768px) { .rc-body { padding: 72px 0 120px; } }
   .rc-grid {
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 56px;
     align-items: start;
   }
-  @media (max-width: 860px) { .rc-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .rc-grid { grid-template-columns: 1fr; gap: 32px; } }
 
   /* SIDEBAR */
   .rc-nav-card {
@@ -120,21 +133,25 @@ const styles = `
     box-shadow: var(--shadow-soft);
     overflow: hidden;
   }
+  @media (max-width: 860px) {
+    .rc-nav-card { position: relative; top: 0; }
+  }
   .rc-nav-header {
     background: var(--accent);
-    padding: 20px 24px;
+    padding: 16px 20px;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--white);
   }
+  @media (min-width: 768px) { .rc-nav-header { padding: 20px 24px; } }
   .rc-nav-list { list-style: none; margin: 0; padding: 12px 0; }
   .rc-nav-item a {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 13px;
     font-weight: 500;
     color: var(--text-muted);
@@ -142,6 +159,7 @@ const styles = `
     transition: var(--transition);
     border-left: 3px solid transparent;
   }
+  @media (min-width: 768px) { .rc-nav-item a { padding: 12px 24px; } }
   .rc-nav-item a:hover,
   .rc-nav-item a.active {
     color: var(--accent);
@@ -150,7 +168,8 @@ const styles = `
   }
 
   /* CONTENT */
-  .rc-content { display: flex; flex-direction: column; gap: 40px; }
+  .rc-content { display: flex; flex-direction: column; gap: 32px; min-width: 0; max-width: 100%; }
+  @media (min-width: 768px) { .rc-content { gap: 40px; } }
 
   /* QUICK SUMMARY CARDS */
   .rc-summary-grid {
@@ -164,10 +183,11 @@ const styles = `
     background: var(--white);
     border-radius: 16px;
     border: 1px solid var(--stone);
-    padding: 24px 22px;
+    padding: 20px 16px;
     text-align: center;
     box-shadow: var(--shadow-soft);
   }
+  @media (min-width: 768px) { .rc-summary-card { padding: 24px 22px; } }
   .rc-summary-icon {
     width: 48px; height: 48px;
     border-radius: 12px;
@@ -182,11 +202,12 @@ const styles = `
 
   .rc-summary-card h5 {
     font-family: var(--font-display);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     color: var(--text-dark);
     margin: 0 0 6px;
   }
+  @media (min-width: 768px) { .rc-summary-card h5 { font-size: 16px; } }
   .rc-summary-card p {
     font-size: 13px;
     color: var(--text-muted);
@@ -206,14 +227,15 @@ const styles = `
   .rc-section-head {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 28px 36px;
+    gap: 12px;
+    padding: 20px 24px;
     border-bottom: 1px solid var(--cream-dark);
     background: var(--cream);
   }
+  @media (min-width: 768px) { .rc-section-head { gap: 16px; padding: 28px 36px; } }
   .rc-section-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 36px; height: 36px;
+    border-radius: 8px;
     background: var(--accent-pale);
     border: 1px solid rgba(196,71,42,0.15);
     display: flex;
@@ -222,67 +244,76 @@ const styles = `
     color: var(--accent);
     flex-shrink: 0;
   }
+  @media (min-width: 768px) { .rc-section-icon { width: 44px; height: 44px; border-radius: 10px; } }
   .rc-section-title {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--text-dark);
     margin: 0;
     letter-spacing: -0.2px;
   }
-  .rc-section-body { padding: 32px 36px; }
+  @media (min-width: 768px) { .rc-section-title { font-size: 22px; } }
+  .rc-section-body { padding: 24px; }
+  @media (min-width: 768px) { .rc-section-body { padding: 32px 36px; } }
   .rc-section-body p {
-    font-size: 15px;
-    line-height: 1.78;
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--text-body);
     font-weight: 300;
     margin: 0 0 16px;
   }
+  @media (min-width: 768px) { .rc-section-body p { font-size: 15px; line-height: 1.78; margin: 0 0 16px; } }
   .rc-section-body p:last-child { margin-bottom: 0; }
   .rc-section-body h4 {
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--text-dark);
-    margin: 28px 0 12px;
+    margin: 24px 0 10px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--cream-dark);
   }
+  @media (min-width: 768px) { .rc-section-body h4 { font-size: 17px; margin: 28px 0 12px; } }
   .rc-list {
     list-style: none;
     margin: 0 0 16px;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
+  @media (min-width: 768px) { .rc-list { gap: 10px; } }
   .rc-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15px;
-    line-height: 1.65;
+    position: relative;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.5;
     color: var(--text-body);
     font-weight: 300;
   }
+  @media (min-width: 768px) { .rc-list li { font-size: 15px; line-height: 1.65; padding-left: 24px; } }
   .rc-list li::before {
     content: '';
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 8px;
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
-    margin-top: 8px;
   }
+  @media (min-width: 768px) { .rc-list li::before { top: 9px; } }
   .rc-list--check li::before { display: none; }
   .rc-list--check li { gap: 10px; }
   .rc-list--check .rc-check { flex-shrink: 0; margin-top: 2px; }
 
   /* TIMELINE TABLE */
+  .rc-timeline-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; }
   .rc-timeline {
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin: 16px 0;
+    min-width: 600px;
     border: 1px solid var(--stone);
     border-radius: 12px;
     overflow: hidden;
@@ -306,12 +337,13 @@ const styles = `
   .rc-timeline-head .rc-tl-cell:last-child { border-right: none; }
   .rc-tl-cell {
     padding: 16px 18px;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-body);
     font-weight: 300;
     line-height: 1.5;
     border-right: 1px solid var(--stone);
   }
+  @media (min-width: 768px) { .rc-tl-cell { font-size: 14px; } }
   .rc-tl-cell:last-child { border-right: none; }
   .rc-timeline-row:nth-child(even) .rc-tl-cell { background: var(--cream); }
   .rc-tl-badge {
@@ -320,9 +352,10 @@ const styles = `
     gap: 5px;
     padding: 4px 10px;
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
   }
+  @media (min-width: 768px) { .rc-tl-badge { font-size: 11px; } }
   .rc-tl-badge--green { background: var(--green-pale); color: var(--green); }
   .rc-tl-badge--orange { background: #FFF4E5; color: #C47D2A; }
   .rc-tl-badge--red { background: var(--accent-pale); color: var(--accent); }
@@ -332,30 +365,32 @@ const styles = `
     background: var(--accent-pale);
     border: 1px solid rgba(196,71,42,0.2);
     border-radius: 12px;
-    padding: 18px 24px;
+    padding: 16px 20px;
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    font-size: 14px;
+    gap: 12px;
+    font-size: 13px;
     color: var(--accent-dark);
     font-weight: 400;
     line-height: 1.6;
   }
+  @media (min-width: 768px) { .rc-alert { padding: 18px 24px; font-size: 14px; gap: 14px; } }
   .rc-alert svg { flex-shrink: 0; margin-top: 2px; }
 
   /* CONTACT */
   .rc-contact-card {
     background: var(--navy);
     border-radius: var(--radius-card);
-    padding: 44px 40px;
+    padding: 32px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 24px;
     flex-wrap: wrap;
     position: relative;
     overflow: hidden;
   }
+  @media (min-width: 768px) { .rc-contact-card { padding: 44px 40px; gap: 32px; } }
   .rc-contact-card::before {
     content: '';
     position: absolute;
@@ -372,7 +407,10 @@ const styles = `
     margin: 0 0 8px;
   }
   .rc-contact-card p { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 300; margin: 0; }
-  .rc-contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .rc-contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 600px) {
+    .rc-contact-links { flex-direction: column; width: 100%; }
+  }
   .rc-contact-link {
     display: flex;
     align-items: center;
@@ -386,9 +424,13 @@ const styles = `
     color: var(--white);
     text-decoration: none;
     transition: var(--transition);
+    word-break: break-all;
+  }
+  @media (max-width: 600px) {
+    .rc-contact-link { justify-content: center; width: 100%; font-size: 12px; padding: 10px 14px; }
   }
   .rc-contact-link:hover { background: var(--accent); border-color: var(--accent); }
-  .rc-contact-link svg { color: var(--accent); }
+  .rc-contact-link svg { color: var(--accent); flex-shrink: 0; }
   .rc-contact-link:hover svg { color: var(--white); }
 
   .rc-label {
@@ -422,36 +464,38 @@ const sections = [
     content: (
       <>
         <p>Cancellation charges are applied based on the notice period provided before the scheduled move date:</p>
-        <div className="rc-timeline">
-          <div className="rc-timeline-row rc-timeline-head">
-            <div className="rc-tl-cell">Notice Period</div>
-            <div className="rc-tl-cell">Cancellation Fee</div>
-            <div className="rc-tl-cell">Refund Status</div>
-          </div>
-          <div className="rc-timeline-row">
-            <div className="rc-tl-cell">15+ days before move</div>
-            <div className="rc-tl-cell">10% of total booking value</div>
-            <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--green"><CheckCircle size={12} /> 90% Refund</span></div>
-          </div>
-          <div className="rc-timeline-row">
-            <div className="rc-tl-cell">8–14 days before move</div>
-            <div className="rc-tl-cell">25% of total booking value</div>
-            <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--green"><CheckCircle size={12} /> 75% Refund</span></div>
-          </div>
-          <div className="rc-timeline-row">
-            <div className="rc-tl-cell">3–7 days before move</div>
-            <div className="rc-tl-cell">50% of total booking value</div>
-            <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--orange"><Clock size={12} /> 50% Refund</span></div>
-          </div>
-          <div className="rc-timeline-row">
-            <div className="rc-tl-cell">48–72 hours before move</div>
-            <div className="rc-tl-cell">75% of total booking value</div>
-            <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--orange"><Clock size={12} /> 25% Refund</span></div>
-          </div>
-          <div className="rc-timeline-row">
-            <div className="rc-tl-cell">Less than 48 hours / No-Show</div>
-            <div className="rc-tl-cell">100% of total booking value</div>
-            <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--red"><XCircle size={12} /> No Refund</span></div>
+        <div className="rc-timeline-wrap">
+          <div className="rc-timeline">
+            <div className="rc-timeline-row rc-timeline-head">
+              <div className="rc-tl-cell">Notice Period</div>
+              <div className="rc-tl-cell">Cancellation Fee</div>
+              <div className="rc-tl-cell">Refund Status</div>
+            </div>
+            <div className="rc-timeline-row">
+              <div className="rc-tl-cell">15+ days before move</div>
+              <div className="rc-tl-cell">10% of total booking value</div>
+              <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--green"><CheckCircle size={12} /> 90% Refund</span></div>
+            </div>
+            <div className="rc-timeline-row">
+              <div className="rc-tl-cell">8–14 days before move</div>
+              <div className="rc-tl-cell">25% of total booking value</div>
+              <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--green"><CheckCircle size={12} /> 75% Refund</span></div>
+            </div>
+            <div className="rc-timeline-row">
+              <div className="rc-tl-cell">3–7 days before move</div>
+              <div className="rc-tl-cell">50% of total booking value</div>
+              <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--orange"><Clock size={12} /> 50% Refund</span></div>
+            </div>
+            <div className="rc-timeline-row">
+              <div className="rc-tl-cell">48–72 hours before move</div>
+              <div className="rc-tl-cell">75% of total booking value</div>
+              <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--orange"><Clock size={12} /> 25% Refund</span></div>
+            </div>
+            <div className="rc-timeline-row">
+              <div className="rc-tl-cell">Less than 48 hours / No-Show</div>
+              <div className="rc-tl-cell">100% of total booking value</div>
+              <div className="rc-tl-cell"><span className="rc-tl-badge rc-tl-badge--red"><XCircle size={12} /> No Refund</span></div>
+            </div>
           </div>
         </div>
         <p>Cancellation fees are computed on the total confirmed booking value including GST. The booking advance is non-transferable to a third party.</p>

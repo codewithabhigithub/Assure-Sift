@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -17,6 +18,9 @@ const navLinks = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isDarkPage = ['/privacy-policy', '/term-condition', '/refund-cancellation', '/payment'].includes(pathname);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -40,9 +44,9 @@ export const Navbar = () => {
               <circle cx="5.5" cy="18.5" r="2.5" />
               <circle cx="18.5" cy="18.5" r="2.5" />
             </svg>
-            <span className="font-display font-bold text-[22px] text-[#1A1A2E] leading-tight">Assure Sift Relocation</span>
+            <span className={`font-display font-bold text-[22px] leading-tight transition-colors duration-300 ${(!isScrolled && isDarkPage) ? 'text-white' : 'text-[#1A1A2E]'}`}>Assure Sift Relocation</span>
           </div>
-          <span className="font-body text-[9px] tracking-[0.15em] ml-[32px] -mt-1 font-medium" style={{ color: '#C4472A' }}>RELOCATION SERVICES</span>
+          <span className="font-body text-[9px] tracking-[0.15em] ml-[32px] -mt-1 font-medium animate-pulse" style={{ color: '#C4472A' }}>RELOCATION SERVICES</span>
         </Link>
 
         {/* Desktop Links */}
@@ -51,7 +55,7 @@ export const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="font-body font-medium text-[14px] text-[#1A1A2E] hover:text-[#C4472A] transition-colors relative group"
+              className={`font-body font-medium text-[14px] transition-colors duration-300 ${(!isScrolled && isDarkPage) ? 'text-white hover:text-[#C4472A]' : 'text-[#1A1A2E] hover:text-[#C4472A]'} relative group`}
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#C4472A] transition-all duration-300 group-hover:w-full"></span>
@@ -69,7 +73,7 @@ export const Navbar = () => {
           </Link>
           <Link
             href="/login"
-            className="border border-[#1A1A2E] text-[#1A1A2E] font-body font-semibold text-[14px] px-[24px] py-[12px] rounded-[50px] hover:bg-[#1A1A2E] hover:text-white transition-colors"
+            className={`border font-body font-semibold text-[14px] px-[24px] py-[12px] rounded-[50px] transition-colors duration-300 ${(!isScrolled && isDarkPage) ? 'border-white text-white hover:bg-white hover:text-[#1A1A2E]' : 'border-[#1A1A2E] text-[#1A1A2E] hover:bg-[#1A1A2E] hover:text-white'}`}
           >
             Admin
           </Link>
@@ -77,7 +81,7 @@ export const Navbar = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden p-2 text-[#1A1A2E]"
+          className={`lg:hidden p-2 transition-colors duration-300 ${(!isScrolled && isDarkPage) ? 'text-white' : 'text-[#1A1A2E]'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
