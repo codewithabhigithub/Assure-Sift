@@ -45,31 +45,53 @@ const updateStatus = async (req, res, next) => {
 
 const createEnquiry = async (req, res, next) => {
     console.log("userinfo ------------", req.body);
+    
     try {
         const { name, email, phone } = req.body;
+        // Validation
         if (!name || !email || !phone) {
-            return errorResponse(res, 'Name, Email, and Phone are required', 400);
+            return errorResponse(
+                res,
+                'Name, Email, and Phone are required',
+                400
+            );
         }
 
+        // Generate Order ID
         const order_id = await userService.generateOrderId('SSENQ');
-        const userData = { ...req.body, order_id };
 
-        // Normalize fields
+        // Merge Data
+        const userData = {
+            ...req.body,
+            order_id
+        };
+
+        // Normalize Empty Fields
         for (let key in userData) {
-            if (userData[key] === '') userData[key] = null;
+            if (userData[key] === '') {
+                userData[key] = null;
+            }
         }
 
+        // Save Enquiry
         await userService.createUserEnquiry(userData);
 
-        // Prepare email content (mimicking existing logic)
+        // Generate Email Content
         const generateOrderDetails = (details) => {
             let str = '';
             for (const [key, value] of Object.entries(details)) {
-                if (value) str += `${key}: ${value}\n`;
+                if (
+                    value !== null &&
+                    value !== undefined &&
+                    value !== ''
+                ) {
+                    str += `${key}: ${value}\n`;
+                }
             }
             return str;
         };
 
+        // Email Body
         const emailContent = generateOrderDetails({
             'Enquiry No': order_id,
             'Name': userData.name,
@@ -95,14 +117,33 @@ const createEnquiry = async (req, res, next) => {
             'Content': userData.content,
         });
 
-        // Send emails asynchronously (mimicking existing logic)
-        Promise.all([
-            sendEmail(userData.email, 'Your Pickup Request Received', `Thank you for your request. Here are your details:\n${emailContent}`),
-            sendEmail(process.env.COMPANY_EMAIL, 'New Pickup Request', emailContent)
-        ]).catch(err => console.error('Email error:', err));
+        // Send Emails
+        await Promise.all([
+            // Customer Email
+            sendEmail(
+                userData.email,
+                'Your Pickup Request Received',
+                `Thank you for your request.\n\nHere are your details:\n\n${emailContent}`
+            ),
 
-        return successResponse(res, { order_id }, 'User details added successfully and emails sent', 201);
+            // Company Email
+            sendEmail(
+                process.env.COMPANY_EMAIL,
+                'New Pickup Request',
+                emailContent
+            )
+        ]);
+
+        // Success Response
+        return successResponse(
+            res,
+            { order_id },
+            'User details added successfully and emails sent',
+            201
+        );
+
     } catch (error) {
+        console.log("Create Enquiry Error:", error);
         next(error);
     }
 };
